@@ -1,21 +1,11 @@
 import React, { useState, useEffect } from "react";
-
+import { showBoard } from "./functions";
 
 const App = () => {
     const [board, setBoard] = useState(null);
 
-    const showBoard = () => {
-        let row = [];
-        for (let i = 1; i <= 10; i++) {
-            let box = Array(10).fill(0)
-            row.push(box)
-        }
-        setBoard(row)
-        return row
-    }
-
     useEffect(() => {
-        showBoard()
+        setBoard(showBoard())
     }, [])
 
 
@@ -27,9 +17,7 @@ const App = () => {
                         board.map((row, indexRow) => (
                             <div key={indexRow}>
                                 {row.map((box, indexBox) => (
-                                    <div key={indexBox}>
-                                        {box}
-                                    </div>
+                                    <div id="box" key={indexBox}>{box}</div>
                                 ))}
                             </div>
                         ))
@@ -40,3 +28,4 @@ const App = () => {
 }
 
 export default App
+    
