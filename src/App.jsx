@@ -4,41 +4,39 @@ import { showBoard } from "./functions";
 const App = () => {
     const [board, setBoard] = useState(null);
     const [positionShip, setPositionShip]= useState([])
-    /* const addShip= (arr)=>{
-        for(let i= 0; i < arr.length -1; i ++){
-            arr[i]=1
-        }
-        return arr
-    } */
     
-    const addShip=()=>{
-        let shipInBoard= [...board];
-        shipInBoard[0][0]= 1
-        shipInBoard[0][1]= 1
-        shipInBoard[0][2]= 1
-        shipInBoard[0][3]= 1
-        shipInBoard[0][4]= 1 
-        setBoard(shipInBoard)
+    const playStart= (indexRow, indexBox)=>{
+        let actions= [...board];
+        if (actions[indexRow][indexBox] == 0){
+            addShip(indexRow, indexBox)
+        }
+        else if(actions[indexRow][indexBox] == 1){
+            shootCannon(indexRow, indexBox)
+        }
     }
 
+    const addShip=(indexRow, indexBox)=>{
+        let shipInBoard= [...board];
+        shipInBoard[indexRow].splice(indexBox,5,1,1,1,1,1) 
+        setBoard(shipInBoard)
+        /* if(shipInBoard[indexRow][indexBox] == 1){
+            shootCannon()
+        } */
+    }
+
+    const shootCannon=(indexRow,  indexBox)=>{
+        let shot= [...board]
+        if(shot[indexRow][indexBox] == 1){
+            shot[indexRow][indexBox]=2
+            setBoard(shot)
+        }
+    }
+
+    
    useEffect(() => {
        setBoard(showBoard())
     }, [])
     
-
-    //Posicionamineto vértical de pieza
-    /* board[0][3]=1
-    board[0][2]=1
-    board[0][1]=1 */
-    
-    //Posicionamiento horizontal de pieza
-   /*  board[1][0]=1
-    board[2][0]=1
-    board[3][0]=1 */
-
-
-
-
     return (
         <>
             <div id="board">
@@ -47,7 +45,7 @@ const App = () => {
                         board.map((row, indexRow) => (
                             <div key={indexRow}>
                                 {row.map((box, indexBox) => (
-                                    <button key={indexBox} id="box" onClick={addShip} type="button" className="btn btn-light">{box}</button>
+                                    <button key={indexBox} id="box" onClick={()=>playStart(indexRow, indexBox)} type="button" className="btn btn-light">{box}</button>
                                 ))}
                             </div>
                         ))
@@ -58,10 +56,15 @@ const App = () => {
 }
 
 export default App
+
     
     
 
    
+
+
+
+
 
 
 
