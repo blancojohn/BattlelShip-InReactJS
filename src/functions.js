@@ -11,16 +11,16 @@ export const showBoardHuman = () => {
 
 export const showBoardMachine= ()=>{
     let board = []; 
-    let randomPositionY1= Math.floor(Math.random()* 4)
-    let randomPositionY2= Math.floor(Math.random() * 4 + 5)
+    let indexRow= Math.floor(Math.random()* 4)
+    let indexBox= Math.floor(Math.random() * 4 + 5)
     
     for(let i = 0; i < 10; i++) {  
         board[i] = [];  
         for(let j = 0; j < 10; j++) {  
-            if(j == randomPositionY1) {  
+            if(j == indexRow) {  
                 board[i][j] = "";  
             } 
-            else if(j == randomPositionY2){  
+            else if(j == indexBox){  
                 board[i][j] = "";   
             }
             else{

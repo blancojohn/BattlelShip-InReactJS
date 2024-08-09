@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React, {useState} from "react";
+import { showBoardHuman } from "../functions";
 
 
 
-const BoardHuman = ({ boardHuman, setBoardHuman }) => {
+const BoardHuman = ({ machineTurn, setMachineTurn }) => {
+    const [boardHuman, setBoardHuman]= useState(showBoardHuman());
 
     const addShip = (indexRow, indexBox) => {
         let shipInBoard = [...boardHuman];
@@ -12,18 +14,25 @@ const BoardHuman = ({ boardHuman, setBoardHuman }) => {
     }
     
     const getGunShotMachine= ()=>{
-        let shot= [...boardHuman];
+        let coordinates= [...boardHuman];
         let indexRow= Math.floor(Math.random() * 9);
         let indexBox= Math.floor(Math.random() * 9);
-        console.log("TIRO POR MACHINE",indexRow, indexBox)
+        coordinates[indexRow][indexBox];
+        if(coordinates[indexRow][indexBox] == ""){
+            coordinates[indexRow][indexBox]= "I HIT YOU!"
+            setBoardHuman(coordinates)  
+        }
+        else if(coordinates[indexRow][indexBox] == null){
+            coordinates[indexRow][indexBox]= "I FAILED!"
+            setBoardHuman(coordinates)  
+        }
+        console.log("TIRO EN LA BOX POR MACHINE", indexRow, indexBox)
     }
-
-    useEffect(()=>{
-        getGunShotMachine()
-    },[])
-
-
-
+    
+    if(machineTurn == true){
+        getGunShotMachine();
+    } 
+    
     return (
 
         <>
@@ -45,6 +54,9 @@ const BoardHuman = ({ boardHuman, setBoardHuman }) => {
 }
 
 export default BoardHuman;
+
+
+
    
 
 
