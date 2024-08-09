@@ -3,7 +3,7 @@ import { showBoardMachine } from "../functions";
 
 
 
-const Board = ({ boardMachine, setBoardMachine }) => {
+const BoardMachine = ({ boardMachine, setBoardMachine }) => {
 
     useEffect(() => {
         setBoardMachine(showBoardMachine())
@@ -25,7 +25,7 @@ const Board = ({ boardMachine, setBoardMachine }) => {
         setBoardMachine(shipInBoard)
     } */
 
-    const shootCannon=(indexRow,  indexBox)=>{
+    const getShootCannonHuman=(indexRow,  indexBox)=>{
         let shot= [...boardMachine]
         if(shot[indexRow][indexBox] == ""){
             shot[indexRow][indexBox]= "ON TARGET!"
@@ -46,7 +46,7 @@ const Board = ({ boardMachine, setBoardMachine }) => {
                     boardMachine.map((row, indexRow) => (
                         <div key={indexRow}>
                             {row.map((box, indexBox) => (
-                                <button key={indexBox} onClick={()=>shootCannon(indexRow, indexBox)} id="box" type="button" className="btn btn-light">{box}</button>
+                                <button key={indexBox} onClick={()=>getShootCannonHuman(indexRow, indexBox)} id="box" type="button" className="btn btn-light">{box}</button>
                             ))}
                         </div>
                     ))
@@ -57,4 +57,4 @@ const Board = ({ boardMachine, setBoardMachine }) => {
     )
 }
 
-export default Board;
+export default BoardMachine;

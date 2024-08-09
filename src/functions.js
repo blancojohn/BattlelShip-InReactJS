@@ -1,13 +1,36 @@
 
 //Crea el tablero y es pasada como argumento para setear el estado de board.
-/* export const showBoard = () => {
+export const showBoardHuman = () => {
     let row = [];
     for (let i = 1; i <= 10; i++) {
         let box = Array(10).fill(null)
         row.push(box)
     }
     return row
-} */
+}
+
+export const showBoardMachine= ()=>{
+    let board = []; 
+    let randomPositionY1= Math.floor(Math.random()* 4)
+    let randomPositionY2= Math.floor(Math.random() * 4 + 5)
+    
+    for(let i = 0; i < 10; i++) {  
+        board[i] = [];  
+        for(let j = 0; j < 10; j++) {  
+            if(j == randomPositionY1) {  
+                board[i][j] = "";  
+            } 
+            else if(j == randomPositionY2){  
+                board[i][j] = "";   
+            }
+            else{
+                board[i][j] = null; 
+            }  
+        }  
+    } 
+    return board 
+}
+console.log(showBoardMachine());  
 
 /* let arrayBidimensional = [];  
 let valorIgual = 1; // el valor que se repite  
@@ -46,25 +69,4 @@ console.log(arrayBidimensional); */
 
 const resultado = generarArray(10, 10, 5); // 3 filas, 4 columnas, valor 5 en la primera columna  
 console.log(resultado);  */
-export const showBoardMachine= ()=>{
-    let board = []; 
-    let randomPositionY1= Math.floor(Math.random()* 4)
-    let randomPositionY2= Math.floor(Math.random() * 4 + 5)
-    
-    for(let i = 0; i < 10; i++) {  
-        board[i] = [];  
-        for(let j = 0; j < 10; j++) {  
-            if(j == randomPositionY1) {  
-                board[i][j] = "";  
-            } 
-            else if(j == randomPositionY2){  
-                board[i][j] = "";   
-            }
-            else{
-                board[i][j] = null; 
-            }  
-        }  
-    } 
-    return board 
-}
-console.log(showBoardMachine());  
+

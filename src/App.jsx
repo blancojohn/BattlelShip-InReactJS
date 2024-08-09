@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import Board from "./components/Board";
+import BoardMachine from "./components/BoardMachine";
+import BoardHuman from "./components/BoardHuman";
 
 
 const App = () => {
     const [boardMachine, setBoardMachine] = useState(null);
-    const [positionShip, setPositionShip]= useState(null)
+    const [boardHuman, setBoardHuman]= useState(null);
     
    /*  const playStart= (indexRow, indexBox)=>{
         let actions= [...board];
@@ -37,7 +38,8 @@ const App = () => {
     
     return (
         <>
-            <Board boardMachine={boardMachine} setBoardMachine={setBoardMachine}/>
+            <BoardMachine boardMachine={boardMachine} setBoardMachine={setBoardMachine}/>
+            <BoardHuman boardHuman={boardHuman} setBoardHuman={setBoardHuman}/>
         </>
     )
 }
