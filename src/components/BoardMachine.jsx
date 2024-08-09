@@ -9,23 +9,7 @@ const BoardMachine = ({ boardMachine, setBoardMachine }) => {
         setBoardMachine(showBoardMachine())
     }, [])
 
-    /* const playStart = (indexRow, indexBox) => {
-        let actions = [...boardMachine];
-        if (actions[indexRow][indexBox] == 0) {
-            addShip(indexRow, indexBox)
-        }
-        else if (actions[indexRow][indexBox] == "") {
-            shootCannon(indexRow, indexBox)
-        }
-    } */
-
-    /* const addShip = (indexRow, indexBox) => {
-        let shipInBoard = [...boardMachine];
-        shipInBoard[indexRow].splice(indexBox, 5, "", "", "", "", "")
-        setBoardMachine(shipInBoard)
-    } */
-
-    const getShootCannonHuman=(indexRow,  indexBox)=>{
+    const getGunShotHuman=(indexRow,  indexBox)=>{
         let shot= [...boardMachine]
         if(shot[indexRow][indexBox] == ""){
             shot[indexRow][indexBox]= "ON TARGET!"
@@ -46,7 +30,7 @@ const BoardMachine = ({ boardMachine, setBoardMachine }) => {
                     boardMachine.map((row, indexRow) => (
                         <div key={indexRow}>
                             {row.map((box, indexBox) => (
-                                <button key={indexBox} onClick={()=>getShootCannonHuman(indexRow, indexBox)} id="box" type="button" className="btn btn-light">{box}</button>
+                                <button key={indexBox} onClick={()=>getGunShotHuman(indexRow, indexBox)} id="box" type="button" className="btn btn-light">{box}</button>
                             ))}
                         </div>
                     ))
@@ -58,3 +42,4 @@ const BoardMachine = ({ boardMachine, setBoardMachine }) => {
 }
 
 export default BoardMachine;
+    

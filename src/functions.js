@@ -30,7 +30,7 @@ export const showBoardMachine= ()=>{
     } 
     return board 
 }
-console.log(showBoardMachine());  
+console.log("DESPLIEGUES DE PIEZAS MACHINE",showBoardMachine());  
 
 /* let arrayBidimensional = [];  
 let valorIgual = 1; // el valor que se repite  

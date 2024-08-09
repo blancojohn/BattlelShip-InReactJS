@@ -1,41 +1,27 @@
 import React, { useEffect } from "react";
-import { showBoardHuman } from "../functions";
 
 
 
 const BoardHuman = ({ boardHuman, setBoardHuman }) => {
 
-    useEffect(() => {
-        setBoardHuman(showBoardHuman())
-    }, [])
-
-    /* const playStart = (indexRow, indexBox) => {
-        let actions = [...boardMachine];
-        if (actions[indexRow][indexBox] == 0) {
-            addShip(indexRow, indexBox)
-        }
-        else if (actions[indexRow][indexBox] == "") {
-            shootCannon(indexRow, indexBox)
-        }
-    } */
-   /* const shootCannon=(indexRow,  indexBox)=>{
-       let shot= [...boardHuman]
-       if(shot[indexRow][indexBox] == ""){
-           shot[indexRow][indexBox]= "ON TARGET!"
-           setBoardHuman(shot)
-       }
-       else if(shot[indexRow][indexBox] == null){
-           shot[indexRow][indexBox]= "YOU FAILED!"
-           setBoardHuman(shot)
-       }
-   } */
-
     const addShip = (indexRow, indexBox) => {
         let shipInBoard = [...boardHuman];
         shipInBoard[indexRow].splice(indexBox, 5, "", "", "", "", "")
-        console.log(shipInBoard)
+        console.log("DESPLIEGUE DE PIEZAS HUMAN",shipInBoard)
         setBoardHuman(shipInBoard)
-    } 
+    }
+    
+    const getGunShotMachine= ()=>{
+        let shot= [...boardHuman];
+        let indexRow= Math.floor(Math.random() * 9);
+        let indexBox= Math.floor(Math.random() * 9);
+        console.log("TIRO POR MACHINE",indexRow, indexBox)
+    }
+
+    useEffect(()=>{
+        getGunShotMachine()
+    },[])
+
 
 
     return (
@@ -59,3 +45,7 @@ const BoardHuman = ({ boardHuman, setBoardHuman }) => {
 }
 
 export default BoardHuman;
+   
+
+
+        
