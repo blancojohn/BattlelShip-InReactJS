@@ -9,64 +9,54 @@ export const showBoardHuman = () => {
     return row
 }
 
-export const showBoardMachine= ()=>{
-    let board = []; 
-    let indexRow= Math.floor(Math.random()* 4)
-    let indexBox= Math.floor(Math.random() * 4 + 5)
-    
-    for(let i = 0; i < 10; i++) {  
-        board[i] = [];  
-        for(let j = 0; j < 10; j++) {  
-            if(j == indexRow) {  
-                board[i][j] = "";  
-            } 
-            else if(j == indexBox){  
-                board[i][j] = "";   
+export const showBoardMachine = () => {
+    let board = [];
+    let indexRow = Math.floor(Math.random() * 4)
+    let indexBox = Math.floor(Math.random() * 4 + 5)
+
+    for (let i = 0; i < 10; i++) {
+        board[i] = [];
+        for (let j = 0; j < 10; j++) {
+            if (j == indexRow) {
+                board[i][j] = "";
             }
-            else{
-                board[i][j] = null; 
-            }  
-        }  
-    } 
-    return board 
+            else if (j == indexBox) {
+                board[i][j] = "";
+            }
+            else {
+                board[i][j] = null;
+            }
+        }
+    }
+    return board
 }
-console.log("DESPLIEGUES DE PIEZAS MACHINE",showBoardMachine());  
+console.log("DESPLIEGUES DE PIEZAS MACHINE", showBoardMachine());
 
-/* let arrayBidimensional = [];  
-let valorIgual = 1; // el valor que se repite  
-let valorConsecutivo = 2; // el valor que se coloca en índices consecutivos  
+//FUNCIONES PARA QUE IMPORTARÉ LUEGO PARA TENER MENOS CÓDIGO EN LOS COMPONENTES
+/* export const getShotMachine = (arr) => {
+    let coordinates = [...arr];
+    let indexRow = Math.floor(Math.random() * 9);
+    let indexBox = Math.floor(Math.random() * 9);
+    if (coordinates[indexRow][indexBox] == "") {
+        coordinates[indexRow][indexBox] = "I HIT YOU!"
+    }
+    else if (coordinates[indexRow][indexBox] == null) {
+        coordinates[indexRow][indexBox] = "I FAILED!"
+    }
+    console.log("TIRO EN LA BOX POR MACHINE", indexRow, indexBox)
+}
 
-// Crear un array de 3 filas  
-for (let i = 0; i < 10; i++) {  
-    arrayBidimensional[i] = []; // Inicializa cada fila como un array  
-    // Rellenar cada fila  
-    for (let j = 0; j < 10; j++) {  
-        if (j === 2) { // en el índice 2, coloca los cuatro valores consecutivos  
-            arrayBidimensional[i][j] = valorConsecutivo;  
-            arrayBidimensional[i][j + 1] = valorConsecutivo;  
-            arrayBidimensional[i][j + 2] = valorConsecutivo;  
-            arrayBidimensional[i][j + 3] = valorConsecutivo;  
-            j += 3; // Salta los siguientes índices  
-        } else {  
-            arrayBidimensional[i][j] = valorIgual; // Coloca el valor repetido  
-        }  
-    }  
-}  
+export const getShotHuman = (arr, indexRow, indexBox) => {
+    let coordinates = [...arr]
+    if (coordinates[indexRow][indexBox] == "") {
+        coordinates[indexRow][indexBox] = "ON TARGET!"
+        console.log(coordinates)
+    }
+    else if (coordinates[indexRow][indexBox] == null) {
+        coordinates[indexRow][indexBox] = "YOU FAILED!"
+        console.log(coordinates)
+    }
+}
 
-console.log(arrayBidimensional); */
 
-/* function generarArray(filas, columnas, valor) {  
-    const array = [];  
-    for (let i = 0; i < filas; i++) {  
-        const fila = [];  
-        for (let j = 0; j < columnas; j++) {  
-            fila.push(j === 0 ? valor : 0); // Asignar valor solo a la primera columna  
-        }  
-        array.push(fila);  
-    }  
-    return array;  
-}  
-
-const resultado = generarArray(10, 10, 5); // 3 filas, 4 columnas, valor 5 en la primera columna  
-console.log(resultado);  */
-
+ */

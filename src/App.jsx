@@ -5,13 +5,12 @@ import BoardHuman from "./components/BoardHuman";
 
 const App = () => {
     
-    const [humanTurn, setHumanTurn]= useState(true);
-    const [machineTurn, setMachineTurn]= useState(false);
+    const [turn, setTurn]= useState(0);
 
     return (
         <>
-            <BoardMachine machineTurn={machineTurn} setMachineTurn={setMachineTurn} humanTurn={humanTurn} setHumanTurn={setHumanTurn}/>
-            <BoardHuman machineTurn={machineTurn} setMachineTurn={setMachineTurn} humanTurn={humanTurn} setHumanTurn={setHumanTurn}/>
+            <BoardMachine setTurn={setTurn} />
+            <BoardHuman turn={turn} />
         </>
     )
 }

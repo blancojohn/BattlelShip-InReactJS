@@ -2,31 +2,28 @@ import React, {useState} from "react";
 import { showBoardMachine } from "../functions";
 
 
-const BoardMachine = ({ humanTurn, setHumanTurn, setMachineTurn }) => {
+const BoardMachine = ({ setTurn }) => {
     const [boardMachine, setBoardMachine] = useState(showBoardMachine());
     
-    
     const getGunShotHuman=(indexRow,  indexBox)=>{
-        if(humanTurn == true){
-            let coordinates= [...boardMachine]
-            if(coordinates[indexRow][indexBox] == ""){
-                coordinates[indexRow][indexBox]= "ON TARGET!"
-                setBoardMachine(coordinates)
-                setHumanTurn(false)
-                setMachineTurn(true)
-            }
-            else if(coordinates[indexRow][indexBox] == null){
-                coordinates[indexRow][indexBox]= "YOU FAILED!"
-                setBoardMachine(coordinates)
-                setHumanTurn(false)
-                setMachineTurn(true)
-            }
+        let coordinates= [...boardMachine]
+        if(coordinates[indexRow][indexBox] == ""){
+            coordinates[indexRow][indexBox]= "ON TARGET!"
+            setBoardMachine(coordinates)
+            countTurns()
         }
+        else if(coordinates[indexRow][indexBox] == null){
+            coordinates[indexRow][indexBox]= "YOU FAILED!"
+            setBoardMachine(coordinates)
+            countTurns()
+        }
+    }
 
-        }
+    const countTurns= ()=>{
+        setTurn(prevCount=> prevCount + 1)
+    }
 
     return (
-
         <>
             <div id="board">
                 {
@@ -41,11 +38,15 @@ const BoardMachine = ({ humanTurn, setHumanTurn, setMachineTurn }) => {
                 }
             </div>
         </>
-
     )
 }
 
 export default BoardMachine;
+
     
 
     
+        
+
+    
+
