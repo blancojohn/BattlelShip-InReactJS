@@ -1,15 +1,19 @@
 
 #board {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(10, 1 fr);
   color: brown;
   justify-content: start;
-  margin-top: 2%;
+  margin-top: 8%;
+  width: 300px;
+  height: 300px;
+  margin-left: 160px;
+  background-color: red;
 }
 
 #box {
-  width: 75px;
-  height: 75px;
+  width: 30px;
+  height: 30px;
   border: 1px solid gray;
   text-align: center;
 }

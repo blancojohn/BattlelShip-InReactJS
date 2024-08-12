@@ -1,19 +1,21 @@
 import React, {useState} from "react";
 import { showBoardMachine } from "../functions";
+import ContainerSquare from "./ContainerSquare";
+import Square from "./Square";
 
 
-const BoardMachine = ({ setTurn }) => {
+const Machine = ({ setTurn }) => {
     const [boardMachine, setBoardMachine] = useState(showBoardMachine());
     
     const getGunShotHuman=(indexRow,  indexBox)=>{
         let coordinates= [...boardMachine]
         if(coordinates[indexRow][indexBox] == ""){
-            coordinates[indexRow][indexBox]= "ON TARGET!"
+            coordinates[indexRow][indexBox]= 2
             setBoardMachine(coordinates)
             countTurns()
         }
         else if(coordinates[indexRow][indexBox] == null){
-            coordinates[indexRow][indexBox]= "YOU FAILED!"
+            coordinates[indexRow][indexBox]= 3
             setBoardMachine(coordinates)
             countTurns()
         }
@@ -25,23 +27,23 @@ const BoardMachine = ({ setTurn }) => {
 
     return (
         <>
-            <div id="board">
+            <ContainerSquare>
                 {
                     (boardMachine != null) &&
                     boardMachine.map((row, indexRow) => (
-                        <div key={indexRow}>
+                        <span key={indexRow}>
                             {row.map((box, indexBox) => (
-                                <button key={indexBox} onClick={()=>{getGunShotHuman(indexRow, indexBox)}} id="box" type="button" className="btn btn-light">{box}</button>
+                                <Square key={indexBox} getFunction={()=>{getGunShotHuman(indexRow, indexBox)}}>{box}</Square>
                             ))}
-                        </div>
+                        </span>
                     ))
                 }
-            </div>
+            </ContainerSquare>
         </>
     )
 }
 
-export default BoardMachine;
+export default Machine;
 
     
 

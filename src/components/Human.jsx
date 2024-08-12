@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { showBoardHuman } from "../functions";
+import ContainerSquare from "./ContainerSquare";
+import Square from "./Square";
 
 
 
-const BoardHuman = ({ turn }) => {
+const Human = ({ turn }) => {
     const [boardHuman, setBoardHuman] = useState(showBoardHuman());
 
     const addShip = (indexRow, indexBox) => {
         let shipInBoard = [...boardHuman];
-        shipInBoard[indexRow].splice(indexBox, 5, "", "", "", "", "")
+        shipInBoard[indexRow].splice(indexBox, 5, 1, 1, 1, 1, 1)
         console.log("DESPLIEGUE DE PIEZAS HUMAN", shipInBoard)
         setBoardHuman(shipInBoard)
     }
@@ -17,12 +19,12 @@ const BoardHuman = ({ turn }) => {
         let coordinates = [...boardHuman];
         let indexRow = Math.floor(Math.random() * 9);
         let indexBox = Math.floor(Math.random() * 9);
-        if (coordinates[indexRow][indexBox] == "") {
-            coordinates[indexRow][indexBox] = "I HIT YOU!"
+        if (coordinates[indexRow][indexBox] == 1) {
+            coordinates[indexRow][indexBox] = 2
             setBoardHuman(coordinates)
         }
         else if (coordinates[indexRow][indexBox] == null) {
-            coordinates[indexRow][indexBox] = "I FAILED!"
+            coordinates[indexRow][indexBox] = 3
             setBoardHuman(coordinates)
         }
         console.log("TIRO EN LA BOX POR MACHINE", indexRow, indexBox)
@@ -35,23 +37,23 @@ const BoardHuman = ({ turn }) => {
 
     return (
         <>
-            <div id="board">
+            <ContainerSquare>
                 {
                     (boardHuman != null) &&
                     boardHuman.map((row, indexRow) => (
-                        <div key={indexRow}>
+                        <span key={indexRow}>
                             {row.map((box, indexBox) => (
-                                <button key={indexBox} onClick={() => addShip(indexRow, indexBox)} id="box" type="button" className="btn btn-light">{box}</button>
+                                <Square key={indexBox} getFunction={() => addShip(indexRow, indexBox)} id="box" type="button" className="btn btn-light">{box}</Square>
                             ))}
-                        </div>
+                        </span>
                     ))
                 }
-            </div>
+            </ContainerSquare>
         </>
     )
 }
 
-export default BoardHuman;
+export default Human;
 
 
 

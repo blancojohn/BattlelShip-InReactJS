@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import BoardMachine from "./components/BoardMachine";
-import BoardHuman from "./components/BoardHuman";
+import Machine from "./components/Machine";
+import Human from "./components/Human";
 
 
 const App = () => {
@@ -9,8 +9,8 @@ const App = () => {
 
     return (
         <>
-            <BoardMachine setTurn={setTurn} />
-            <BoardHuman turn={turn} />
+            <Human turn={turn} />
+            <Machine setTurn={setTurn} />
         </>
     )
 }
