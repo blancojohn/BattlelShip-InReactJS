@@ -6,10 +6,12 @@ import Human from "./components/Human";
 const App = () => {
     
     const [turn, setTurn]= useState(0);
+    
+
 
     return (
         <>
-            <Human turn={turn} />
+            <Human turn={turn}  />
             <Machine setTurn={setTurn} />
         </>
     )

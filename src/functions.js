@@ -60,3 +60,34 @@ export const getShotHuman = (arr, indexRow, indexBox) => {
 
 
  */
+
+/* import React, { useState } from 'react';  
+
+const Componente = () => {  
+  const [array, setArray] = useState(Array(10).fill(Array(10).fill('blue'))); // 10x10 array con color azul  
+
+  const handleClick = (rowIndex, colIndex) => {  
+    const newArray = array.map((row, rIdx) =>  
+      row.map((color, cIdx) => (rIdx === rowIndex && cIdx === colIndex ? 'red' : color))  
+    );  
+    setArray(newArray);  
+  };  
+
+  return (  
+    <div>  
+      {array.map((row, rowIndex) => (  
+        <div key={rowIndex} style={{ display: 'flex' }}>  
+          {row.map((color, colIndex) => (  
+            <div  
+              key={colIndex}  
+              onClick={() => handleClick(rowIndex, colIndex)}  
+              style={{ width: '50px', height: '50px', backgroundColor: color, margin: '5px' }}  
+            />  
+          ))}  
+        </div>  
+      ))}  
+    </div>  
+  );  
+};  
+
+export default Componente; */

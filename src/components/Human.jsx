@@ -7,7 +7,7 @@ import Square from "./Square";
 
 const Human = ({ turn }) => {
     const [boardHuman, setBoardHuman] = useState(showBoardHuman());
-
+    
     const addShip = (indexRow, indexBox) => {
         let shipInBoard = [...boardHuman];
         shipInBoard[indexRow].splice(indexBox, 5, 1, 1, 1, 1, 1)
@@ -29,6 +29,7 @@ const Human = ({ turn }) => {
         }
         console.log("TIRO EN LA BOX POR MACHINE", indexRow, indexBox)
     }
+
     useEffect(() => {
         if (turn != 0) {
             getGunShotMachine()
@@ -43,7 +44,7 @@ const Human = ({ turn }) => {
                     boardHuman.map((row, indexRow) => (
                         <span key={indexRow}>
                             {row.map((box, indexBox) => (
-                                <Square key={indexBox} getFunction={() => addShip(indexRow, indexBox)} id="box" type="button" className="btn btn-light">{box}</Square>
+                                <Square key={indexBox} getFunction={() => {addShip(indexRow, indexBox)}}>{box}</Square>
                             ))}
                         </span>
                     ))
@@ -54,6 +55,9 @@ const Human = ({ turn }) => {
 }
 
 export default Human;
+
+
+
 
 
 
