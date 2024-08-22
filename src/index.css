@@ -17,7 +17,17 @@
   text-align: center;
 }
 
-#childrenBox {
+.childrenBox {
   visibility: hidden;
 }
+
+#modal {
+  height: 60px;
+  width: 110px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 

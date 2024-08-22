@@ -1,93 +1,97 @@
 
-//Crea el tablero y es pasada como argumento para setear el estado de board.
-export const showBoardHuman = () => {
-    let row = [];
-    for (let i = 1; i <= 10; i++) {
-        let box = Array(10).fill(null)
-        row.push(box)
-    }
-    return row
+
+export const buildBoard = () => {
+  let board = [
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    [1, null, null, null, null, null, null, null, null, null],
+    [2, null, null, null, null, null, null, null, null, null],
+    [3, null, null, null, null, null, null, null, null, null],
+    [4, null, null, null, null, null, null, null, null, null],
+    [5, null, null, null, null, null, null, null, null, null],
+    [6, null, null, null, null, null, null, null, null, null],
+    [7, null, null, null, null, null, null, null, null, null],
+    [8, null, null, null, null, null, null, null, null, null],
+    [9, null, null, null, null, null, null, null, null, null]
+  ]
+  return board
 }
 
-export const showBoardMachine = () => {
-    let board = [];
-    let indexRow = Math.floor(Math.random() * 4)
-    let indexBox = Math.floor(Math.random() * 4 + 5)
+/* TABLERO A CONTINUACIÓN ES PARA PROBAR CÓDIGO */
+let tablero = [
+  [0, null, null, null, null, null, null, null, null, null,],
+  [1, null, null, null, null, null, null, null, null, null,],
+  [2, null, null, null, null, null, null, null, null, null,],
+  [3, null, null, null, null, null, null, null, null, null,],
+  [4, null, null, null, null, null, null, null, null, null,],
+  [5, null, null, null, null, null, null, null, null, null,],
+  [6, null, null, null, null, null, null, null, null, null,],
+  [7, null, null, null, null, null, null, null, null, null,],
+  [8, null, null, null, null, null, null, null, null, null,],
+  [9, null, null, null, null, null, null, null, null, null,]
+];
 
-    for (let i = 0; i < 10; i++) {
-        board[i] = [];
-        for (let j = 0; j < 10; j++) {
-            if (j == indexRow) {
-                board[i][j] = "";
-            }
-            else if (j == indexBox) {
-                board[i][j] = "";
-            }
-            else {
-                board[i][j] = null;
-            }
-        }
-    }
-    return board
-}
-console.log("DESPLIEGUES DE PIEZAS MACHINE", showBoardMachine());
-
-//FUNCIONES PARA QUE IMPORTARÉ LUEGO PARA TENER MENOS CÓDIGO EN LOS COMPONENTES
-/* export const getShotMachine = (arr) => {
-    let coordinates = [...arr];
-    let indexRow = Math.floor(Math.random() * 9);
-    let indexBox = Math.floor(Math.random() * 9);
-    if (coordinates[indexRow][indexBox] == "") {
-        coordinates[indexRow][indexBox] = "I HIT YOU!"
-    }
-    else if (coordinates[indexRow][indexBox] == null) {
-        coordinates[indexRow][indexBox] = "I FAILED!"
-    }
-    console.log("TIRO EN LA BOX POR MACHINE", indexRow, indexBox)
+export const addShipHorizontal= (arr, indexFirstDimension, indexSecondDimension, size)=>{
+  let board= [...arr]
+  let first = board[indexFirstDimension]
+  let ship = indexSecondDimension + size
+  for (let i = indexSecondDimension; i < ship; i++) {
+    first[i] = ""
+  }
+  console.log("DESPLIEGUE PIEZAS HUMAN HORIZONTAL", board)
+  return board 
 }
 
-export const getShotHuman = (arr, indexRow, indexBox) => {
-    let coordinates = [...arr]
-    if (coordinates[indexRow][indexBox] == "") {
-        coordinates[indexRow][indexBox] = "ON TARGET!"
-        console.log(coordinates)
-    }
-    else if (coordinates[indexRow][indexBox] == null) {
-        coordinates[indexRow][indexBox] = "YOU FAILED!"
-        console.log(coordinates)
-    }
+export const addShipVertical = (arr, indexFirstDimension, indexSecondDimension, size) => {
+  let board = [...arr]
+  let ship = indexFirstDimension + size
+  for (let i = indexFirstDimension; i < ship; i++) {
+    board[i][indexSecondDimension] = "";
+  }
+  console.log("DESPLIEGUE PIEZAS HUMAN VERTICAL", board)
+  return board
+}
+ 
+export const getGunShotMachine = (board) => {
+  let coordinates = [...board];
+  let indexRow = Math.floor(Math.random() * 9);
+  let indexBox = Math.floor(Math.random() * 9);
+  if (coordinates[indexRow][indexBox] == "") {
+    coordinates[indexRow][indexBox] = "Y"
+  }
+  else if (coordinates[indexRow][indexBox] == null) {
+    coordinates[indexRow][indexBox] = "N"
+  }
+  console.log("TIRO DE MACHINE", indexRow, indexBox)
+  console.log("VERIFICACIÓN DE TIRO MACHINE", coordinates[indexRow][indexBox])
+  return coordinates
 }
 
+export const getGunShotHuman = (board, indexRow, indexBox) => {
+  let coordinates = [...board]
+  if (coordinates[indexRow][indexBox] == "") {
+    coordinates[indexRow][indexBox] = "Y"
+  }
+  else if (coordinates[indexRow][indexBox] == null) {
+    coordinates[indexRow][indexBox] = "N"
+  }
+  console.log("TIRO HUMAN", indexRow, indexBox)
+  console.log("VERIFICACIÓN TIRO HUMAN", coordinates[indexRow][indexBox])
+  return coordinates
+}
 
- */
-
-/* import React, { useState } from 'react';  
-
-const Componente = () => {  
-  const [array, setArray] = useState(Array(10).fill(Array(10).fill('blue'))); // 10x10 array con color azul  
-
-  const handleClick = (rowIndex, colIndex) => {  
-    const newArray = array.map((row, rIdx) =>  
-      row.map((color, cIdx) => (rIdx === rowIndex && cIdx === colIndex ? 'red' : color))  
-    );  
-    setArray(newArray);  
-  };  
-
-  return (  
-    <div>  
-      {array.map((row, rowIndex) => (  
-        <div key={rowIndex} style={{ display: 'flex' }}>  
-          {row.map((color, colIndex) => (  
-            <div  
-              key={colIndex}  
-              onClick={() => handleClick(rowIndex, colIndex)}  
-              style={{ width: '50px', height: '50px', backgroundColor: color, margin: '5px' }}  
-            />  
-          ))}  
-        </div>  
-      ))}  
-    </div>  
-  );  
-};  
-
-export default Componente; */
+export const addColorsActions = (children) => {
+  let colorAction = ""
+  if (children === "") {
+    colorAction = "btn btn-dark"
+  }
+  else if (children === "Y") {
+    colorAction = "btn btn-danger"
+  }
+  else if (children === "N") {
+    colorAction = "btn btn-primary"
+  }
+  else {
+    colorAction = "btn btn-light"
+  }
+  return colorAction
+}
