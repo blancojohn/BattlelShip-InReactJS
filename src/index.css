@@ -21,12 +21,14 @@
   visibility: hidden;
 }
 
-#modal {
+#buttons-select-directions {
   height: 60px;
   width: 110px;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute; 
+  z-index: 1;
 }
 
 

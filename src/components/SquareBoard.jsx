@@ -16,14 +16,11 @@ const SquareBoard = ({ boardHuman, setBoardHuman, boardMachine, setBoardMachine,
                                 <Square key={indexBox} getFunction={(positions) => {
                                     if (positions == "horizontal") {
                                         setBoardHuman(addShipHorizontal(boardHuman, indexRow, indexBox, 4))
-
                                     }
-
                                     else if (positions == "vertical") {
                                         setBoardHuman(addShipVertical(boardHuman, indexRow, indexBox, 5))
-
                                     }
-                                }}>
+                                }}boardHuman={boardHuman}>
                                     {box}
                                 </Square>
                             ))}
@@ -36,7 +33,7 @@ const SquareBoard = ({ boardHuman, setBoardHuman, boardMachine, setBoardMachine,
                     boardMachine.map((row, indexRow) => (
                         <span key={indexRow}>
                             {row.map((box, indexBox) => (
-                                <Square key={indexBox} getFunction={() => { setBoardMachine(getGunShotHuman(boardMachine, indexRow, indexBox)), setTurn(prevCount => prevCount + 1) }}>{box}</Square>
+                                <Square key={indexBox} get={() => { setBoardMachine(getGunShotHuman(boardMachine, indexRow, indexBox)), setTurn(prevCount => prevCount + 1) }}>{box}</Square>
                             ))}
                         </span>
                     ))
@@ -47,3 +44,5 @@ const SquareBoard = ({ boardHuman, setBoardHuman, boardMachine, setBoardMachine,
 }
 
 export default SquareBoard
+
+

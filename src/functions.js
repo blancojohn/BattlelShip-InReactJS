@@ -35,6 +35,9 @@ export const addShipHorizontal= (arr, indexFirstDimension, indexSecondDimension,
   let first = board[indexFirstDimension]
   let ship = indexSecondDimension + size
   for (let i = indexSecondDimension; i < ship; i++) {
+    /* let invalid= indexSecondDimension - 1
+    if(invalid == invalid) return
+    console.log("ACCIÓN INVÁLIDA", invalid) */
     first[i] = ""
   }
   console.log("DESPLIEGUE PIEZAS HUMAN HORIZONTAL", board)

@@ -17,7 +17,10 @@ const SquareContainer = () => {
 
     return (
         <>  
+            {/* COMPONENTE QUE MUESTRA LOS VALORES PARA TABLERO HUMANO */}
             <SquareBoard turn={turn} boardHuman={boardHuman} setBoardHuman={setBoardHuman} />
+
+            {/* COMPONENTE QUE MUESTRA LOS VALORES PARA TABLERO MACHINE */}
             <SquareBoard setTurn={setTurn} boardMachine={boardMachine} setBoardMachine={setBoardMachine} /> 
         </>
     )

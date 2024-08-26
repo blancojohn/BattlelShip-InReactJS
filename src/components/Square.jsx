@@ -3,12 +3,18 @@ import ButtonsPositions from "./ButtonsPositions";
 import { addColorsActions } from "../functions";
 
 
-const Square = ({ getFunction, children}) => {
+const Square = ({ getFunction, children, boardHuman, get }) => {
     const [colorAction, setColorAction] = useState("btn btn-light");
     const [shipDirectionsArrows, setShipDirectionsArrows] = useState(false);
 
     const set = () => {
-        setShipDirectionsArrows(true)
+        /* Valida para que solo muestre los botones de posicionar en el tablero humano y solo en las casillas vacías */
+        if(boardHuman && children == null ){
+            setShipDirectionsArrows(true)
+        }
+        else{
+            get()
+        }
     }
 
     useEffect(() => {
