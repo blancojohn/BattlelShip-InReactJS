@@ -3,7 +3,7 @@ import ButtonsPositions from "./ButtonsPositions";
 import { addColorsActions } from "../functions";
 
 
-const Square = ({ getFunction, children, boardHuman, get }) => {
+const Square = ({ getFunction, children, boardHuman, get, setNameShip }) => {
     const [colorAction, setColorAction] = useState("btn btn-light");
     const [shipDirectionsArrows, setShipDirectionsArrows] = useState(false);
 
@@ -32,7 +32,7 @@ const Square = ({ getFunction, children, boardHuman, get }) => {
             </div>
             {
                 (shipDirectionsArrows == true) &&
-                    <ButtonsPositions shipDirectionsArrows={shipDirectionsArrows} setShipDirectionsArrows={setShipDirectionsArrows} getFunction={getFunction}/>
+                    <ButtonsPositions shipDirectionsArrows={shipDirectionsArrows} setShipDirectionsArrows={setShipDirectionsArrows} setNameShip={setNameShip} getFunction={getFunction}/>
             }
         </>
     )
