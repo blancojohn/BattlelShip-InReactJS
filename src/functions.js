@@ -16,44 +16,30 @@ export const buildBoard = () => {
   return board
 }
 
-/* TABLERO A CONTINUACIÓN ES PARA PROBAR CÓDIGO */
-let tablero = [
-  [0, null, null, null, null, null, null, null, null, null,],
-  [1, null, null, null, null, null, null, null, null, null,],
-  [2, null, null, null, null, null, null, null, null, null,],
-  [3, null, null, null, null, null, null, null, null, null,],
-  [4, null, null, null, null, null, null, null, null, null,],
-  [5, null, null, null, null, null, null, null, null, null,],
-  [6, null, null, null, null, null, null, null, null, null,],
-  [7, null, null, null, null, null, null, null, null, null,],
-  [8, null, null, null, null, null, null, null, null, null,],
-  [9, null, null, null, null, null, null, null, null, null,]
-];
-
-export const addShipHorizontal= (arr, indexFirstDimension, indexSecondDimension, size)=>{
-  let board= [...arr]
-  let first = board[indexFirstDimension]
-  let ship = indexSecondDimension + size
-  for (let i = indexSecondDimension; i < ship; i++) {
-    /* let invalid= indexSecondDimension - 1
-    if(invalid == invalid) return
-    console.log("ACCIÓN INVÁLIDA", invalid) */
-    first[i] = ""
+export const addShip = (arr, indexFirstDimension, indexSecondDimension, size, position) => {
+  if (position === "horizontal") {
+    let board = [...arr]
+    let first = board[indexFirstDimension]
+    let ship = indexSecondDimension + size
+    for (let i = indexSecondDimension; i < ship; i++) {
+      /* let invalid= indexSecondDimension - 1
+      if(invalid == invalid) return
+      console.log("ACCIÓN INVÁLIDA", invalid) */
+      first[i] = ""
+    }
+    console.log("DESPLIEGUE PIEZAS HUMAN HORIZONTAL", board)
+    return board
+  } else if (position === "vertical") {
+    let board = [...arr]
+    let ship = indexFirstDimension + size
+    for (let i = indexFirstDimension; i < ship; i++) {
+      board[i][indexSecondDimension] = "";
+    }
+    console.log("DESPLIEGUE PIEZAS HUMAN VERTICAL", board)
+    return board
   }
-  console.log("DESPLIEGUE PIEZAS HUMAN HORIZONTAL", board)
-  return board 
 }
 
-export const addShipVertical = (arr, indexFirstDimension, indexSecondDimension, size) => {
-  let board = [...arr]
-  let ship = indexFirstDimension + size
-  for (let i = indexFirstDimension; i < ship; i++) {
-    board[i][indexSecondDimension] = "";
-  }
-  console.log("DESPLIEGUE PIEZAS HUMAN VERTICAL", board)
-  return board
-}
- 
 export const getGunShotMachine = (board) => {
   let coordinates = [...board];
   let indexRow = Math.floor(Math.random() * 9);

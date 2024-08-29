@@ -1,16 +1,30 @@
 import React, { useState, useEffect } from "react";
 import Square from "./Square";
-import { buildBoard, getGunShotMachine, addShipHorizontal, addShipVertical } from "../functions";
+import { buildBoard, getGunShotMachine, addShip } from "../functions";
 
 
 const Human = ({ turn }) => {
     const [boardHuman, setBoardHuman] = useState(buildBoard());
-    const [nameShip, setNameShip] = useState("Porta Aviones")
+    const [nameShip, setNameShip] = useState("Porta Aviones");
+
+    const selectShip=()=>{
+        const namesShips = ["Porta Aviones", "Acorazado", "Destructor", "Submarino", "Bote Patrulla"]
+        if(nameShip === "Porta Aviones"){
+            setNameShip(namesShips[1])
+        }else if(nameShip === "Acorazado"){
+            setNameShip(namesShips[2])
+        }else if(nameShip === "Destructor"){
+            setNameShip(namesShips[3])
+        }else if(nameShip === "Submarino"){
+            setNameShip(namesShips[4])
+        }
+    }
 
     useEffect(() => {
         if (turn != 0) {
             setBoardHuman(getGunShotMachine(boardHuman))
         }
+
     }, [turn])
 
     return (
@@ -22,13 +36,42 @@ const Human = ({ turn }) => {
                         <span key={indexRow}>
                             {row.map((box, indexBox) => (
                                 <Square key={indexBox} getFunction={(positions) => {
-                                    if (positions == "horizontal") {
-                                        setBoardHuman(addShipHorizontal(boardHuman, indexRow, indexBox, 5))
+                                    if(nameShip === "Porta Aviones"){
+                                        if (positions == "horizontal") {
+                                            setBoardHuman(addShip(boardHuman, indexRow, indexBox, 5, positions))
+                                        }else if (positions == "vertical") {
+                                            setBoardHuman(addShip(boardHuman, indexRow, indexBox, 5, positions))
+                                        }
+                                        
+                                    }else if(nameShip === "Acorazado"){
+                                        if (positions == "horizontal") {
+                                            setBoardHuman(addShip(boardHuman, indexRow, indexBox, 4, positions))
+                                        }else if (positions == "vertical") {
+                                            setBoardHuman(addShip(boardHuman, indexRow, indexBox, 4, positions))
+                                        }
+                                        
+                                    }else if(nameShip === "Destructor"){
+                                        if (positions == "horizontal") {
+                                            setBoardHuman(addShip(boardHuman, indexRow, indexBox, 3, positions))
+                                        }else if (positions == "vertical") {
+                                            setBoardHuman(addShip(boardHuman, indexRow, indexBox, 3, positions))
+                                        }
+                                        
+                                    }else if(nameShip === "Submarino"){
+                                        if (positions == "horizontal") {
+                                            setBoardHuman(addShip(boardHuman, indexRow, indexBox, 3, positions))
+                                        }else if (positions == "vertical") {
+                                            setBoardHuman(addShip(boardHuman, indexRow, indexBox, 3, positions))
+                                        }
+                                        
+                                    }else if(nameShip === "Bote Patrulla"){
+                                        if (positions == "horizontal") {
+                                            setBoardHuman(addShip(boardHuman, indexRow, indexBox, 2, positions))
+                                        }else if (positions == "vertical") {
+                                            setBoardHuman(addShip(boardHuman, indexRow, indexBox, 2, positions))
+                                        }
                                     }
-                                    else if (positions == "vertical") {
-                                        setBoardHuman(addShipVertical(boardHuman, indexRow, indexBox, 5))
-                                    }
-                                }} boardHuman={boardHuman} setNameShip={setNameShip}>
+                                }} boardHuman={boardHuman} name={nameShip} setState={selectShip}>
                                     {box}
                                 </Square>
                             ))}
@@ -45,4 +88,7 @@ const Human = ({ turn }) => {
 
 export default Human
 
+
+
+                                        
 
