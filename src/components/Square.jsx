@@ -8,10 +8,11 @@ const Square = ({ getFunction, children, boardHuman, get, setState }) => {
     const [shipDirectionsArrows, setShipDirectionsArrows] = useState(false);
 
     const set = () => {
-        /* Valida para que solo muestre los botones de posicionar en el tablero humano y solo en las casillas vacías */
-        if(boardHuman && children == null ){
+        /* Muestra componente ButtonsPosition en el componente square hijo del componente Human. */
+        if(boardHuman && children == null){
             setShipDirectionsArrows(true)
         }
+        /* Recibe el disparo del Humano en en componente Square hijo del componente Machine */
         else{
             get()
         }

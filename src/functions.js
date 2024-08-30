@@ -21,24 +21,43 @@ export const addShip = (arr, indexFirstDimension, indexSecondDimension, size, po
     let board = [...arr]
     let first = board[indexFirstDimension]
     let ship = indexSecondDimension + size
-    for (let i = indexSecondDimension; i < ship; i++) {
-      /* let invalid= indexSecondDimension - 1
-      if(invalid == invalid) return
-      console.log("ACCIÓN INVÁLIDA", invalid) */
-      first[i] = ""
+    let boxsInvalids= false
+
+    for(let i= indexSecondDimension; i < ship; i++){
+      if(first[i] == null){
+        boxsInvalids= false
+      }else{boxsInvalids= true}
     }
+    
+    if(boxsInvalids == false){
+      for (let i = indexSecondDimension; i < ship; i++) {
+        first[i]= ""
+      }
+    }else{alert("Posicionamiento Inválido")}
     console.log("DESPLIEGUE PIEZAS HUMAN HORIZONTAL", board)
     return board
+
   } else if (position === "vertical") {
     let board = [...arr]
     let ship = indexFirstDimension + size
+    let boxsInvalids= false
+
     for (let i = indexFirstDimension; i < ship; i++) {
-      board[i][indexSecondDimension] = "";
+      if(board[i][indexSecondDimension] == null){
+        boxsInvalids= false
+      }else{boxsInvalids= true}
     }
+
+    if(boxsInvalids == false){
+      for (let i = indexFirstDimension; i < ship; i++) {
+        board[i][indexSecondDimension] = "";
+      }
+    }else{alert("Posicionamiento inválido")}
     console.log("DESPLIEGUE PIEZAS HUMAN VERTICAL", board)
     return board
   }
 }
+
 
 export const getGunShotMachine = (board) => {
   let coordinates = [...board];
@@ -84,3 +103,20 @@ export const addColorsActions = (children) => {
   }
   return colorAction
 }
+
+let arr= [1, null, null, null, null, null, null, null, null, null]
+function validar(arr){
+  let ocupada= false
+  for (let i= 0; i < arr.length; i++){
+    if(arr[i] == ""){
+      ocupada= true
+    }
+  } 
+  /* for (let i= 0; i < arr.length; i++){
+    if(ocupada == true){
+      alert("ocupadas")
+    }
+  } */
+  return ocupada
+}
+console.log(validar(arr))
