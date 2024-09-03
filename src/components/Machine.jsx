@@ -14,9 +14,11 @@ const Machine = ({ setTurn }) => {
                     (boardMachine != null) &&
                     boardMachine.map((row, indexRow) => (
                         <span key={indexRow}>
-                            {row.map((box, indexBox) => (
-                                <Square key={indexBox} get={() => { setBoardMachine(getGunShotHuman(boardMachine, indexRow, indexBox)), setTurn(prevCount => prevCount + 1) }}>{box}</Square>
-                            ))}
+                            {
+                                row.map((box, indexBox) => (
+                                    <Square key={indexBox} get={() => { setBoardMachine(getGunShotHuman(boardMachine, indexRow, indexBox)), setTurn(prevCount => prevCount + 1) }}>{box}</Square>
+                                ))
+                            }
                         </span>
                     ))
                 }

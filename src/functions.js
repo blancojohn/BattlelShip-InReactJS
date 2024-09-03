@@ -16,7 +16,7 @@ export const buildBoard = () => {
   return board
 }
 
-export const addShip = (arr, indexFirstDimension, indexSecondDimension, size, position) => {
+/* export const addShip = (arr, indexFirstDimension, indexSecondDimension, size, position) => {
   if (position === "horizontal") {
     let board = [...arr]
     let first = board[indexFirstDimension]
@@ -62,10 +62,10 @@ export const addShip = (arr, indexFirstDimension, indexSecondDimension, size, po
     console.log("DESPLIEGUE PIEZAS HUMAN VERTICAL", board)
     return board
   }
-}
+} */
 
 
-export const getGunShotMachine = (board) => {
+/* export const getGunShotMachine = (board) => {
   let coordinates = [...board];
   let indexRow = Math.floor(Math.random() * 9);
   let indexBox = Math.floor(Math.random() * 9);
@@ -78,7 +78,7 @@ export const getGunShotMachine = (board) => {
   console.log("TIRO DE MACHINE", indexRow, indexBox)
   console.log("VERIFICACIÓN DE TIRO MACHINE", coordinates[indexRow][indexBox])
   return coordinates
-}
+} */
 
 export const getGunShotHuman = (board, indexRow, indexBox) => {
   let coordinates = [...board]

@@ -3,13 +3,13 @@ import ButtonsPositions from "./ButtonsPositions";
 import { addColorsActions } from "../functions";
 
 
-const Square = ({ getFunction, children, boardHuman, get, setState }) => {
+const Square = ({ getFunction, children, human, get, setState }) => {
     const [colorAction, setColorAction] = useState("btn btn-light");
     const [shipDirectionsArrows, setShipDirectionsArrows] = useState(false);
 
     const set = () => {
         /* Muestra componente ButtonsPosition en el componente square hijo del componente Human. */
-        if(boardHuman && children == null){
+        if(human && children == null){
             setShipDirectionsArrows(true)
         }
         /* Recibe el disparo del Humano en en componente Square hijo del componente Machine */
