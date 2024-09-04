@@ -6,13 +6,15 @@ import { buildBoard } from "../functions";
 const Human = ({ turn }) => {
     const [human, setHuman] = useState({
         board: buildBoard(),
-        nameShip: "Porta Aviones"
+        nameShip: "Porta Aviones",
     });
-
+    
     const addShip = (indexFirstDimension, indexSecondDimension, size, position) => {
-        if (position === "horizontal") {
-            let board = [...human.board]
-            let first = board[indexFirstDimension]
+        let coordinates = [...human.board]
+        let nameShip = human.nameShip
+
+        if (position == "horizontal") {
+            let first = coordinates[indexFirstDimension]
             let ship = indexSecondDimension + size
             let boxsInvalids = false
 
@@ -26,66 +28,55 @@ const Human = ({ turn }) => {
                 for (let i = indexSecondDimension; i < ship; i++) {
                     first[i] = ""
                 }
+                nameShip = selectShip()
             }
             else {
                 alert("Posicionamiento inválido")
             }
-            console.log("DESPLIEGUE PIEZAS HUMAN HORIZONTAL", board)
-            setHuman({
-                board: board,
-                ...human
-            })
+
+            console.log("DESPLIEGUE PIEZAS HUMAN HORIZONTAL", coordinates) 
         }
 
-        else if (position === "vertical") {
-            let board = [...human.board]
+        else if (position == "vertical") {
             let ship = indexFirstDimension + size
             let boxsInvalids = false
 
             for (let i = indexFirstDimension; i < ship; i++) {
-                if (board[i][indexSecondDimension] == "") {
+                if (coordinates[i][indexSecondDimension] == "") {
                     boxsInvalids = true
                 }
             }
 
             if (boxsInvalids == false) {
                 for (let i = indexFirstDimension; i < ship; i++) {
-                    board[i][indexSecondDimension] = "";
+                    coordinates[i][indexSecondDimension] = ""
                 }
+                nameShip = selectShip()
             }
             else {
                 alert("Posicionamiento inválido")
             }
-            console.log("DESPLIEGUE PIEZAS HUMAN VERTICAL", board)
-            setHuman({
-                board: board,
-                ...human
-            })
+
+            console.log("DESPLIEGUE PIEZAS HUMAN VERTICAL", coordinates) 
         }
+        setHuman({
+            board: coordinates,
+            nameShip
+        })
     }
 
     const selectShip = () => {
-        const namesShips = ["Porta Aviones", "Acorazado", "Destructor", "Submarino", "Bote Patrulla"]
-        if (human.nameShip === "Porta Aviones") {
-            setHuman({
-                ...human,
-                nameShip: namesShips[1]
-            })
-        } else if (human.nameShip === "Acorazado") {
-            setHuman({
-                ...human,
-                nameShip: namesShips[2]
-            })
-        } else if (human.nameShip === "Destructor") {
-            setHuman({
-                ...human,
-                nameShip: namesShips[3]
-            })
-        } else if (human.nameShip === "Submarino") {
-            setHuman({
-                ...human,
-                nameShip: namesShips[4]
-            })
+        if (human.nameShip == "Porta Aviones") {
+            return "Acorazado"
+        }
+        else if (human.nameShip == "Acorazado") {
+            return "Destructor"
+        }
+        else if (human.nameShip == "Destructor") {
+            return "Submarino"
+        }
+        else if (human.nameShip == "Submarino") {
+            return "Bote Patrulla"
         }
     }
 
@@ -94,15 +85,15 @@ const Human = ({ turn }) => {
         let indexRow = Math.floor(Math.random() * 9);
         let indexBox = Math.floor(Math.random() * 9);
         if (coordinates[indexRow][indexBox] == "") {
-          coordinates[indexRow][indexBox] = "Y"
+            coordinates[indexRow][indexBox] = "Y"
         }
         else if (coordinates[indexRow][indexBox] == null) {
-          coordinates[indexRow][indexBox] = "N"
+            coordinates[indexRow][indexBox] = "N"
         }
         console.log("TIRO DE MACHINE", indexRow, indexBox)
         console.log("VERIFICACIÓN DE TIRO MACHINE", coordinates[indexRow][indexBox])
         return coordinates
-      }
+    }
 
     useEffect(() => {
         if (turn != 0) {
@@ -123,53 +114,23 @@ const Human = ({ turn }) => {
                         <span key={indexRow}>
                             {
                                 row.map((box, indexBox) => (
-                                    <Square key={indexBox} getFunction={(positions) => {
+                                    <Square key={indexBox} human={human} onAddShip={(positions) => {
                                         if (human.nameShip === "Porta Aviones") {
-                                            if (positions == "horizontal") {
-                                                addShip(indexRow, indexBox, 5, positions)
-                                            }
-                                            else if (positions == "vertical") {
-                                                addShip(indexRow, indexBox, 5, positions)
-                                            }
+                                            addShip(indexRow, indexBox, 5, positions)
                                         }
-
                                         else if (human.nameShip === "Acorazado") {
-                                            if (positions == "horizontal") {
-                                                addShip(indexRow, indexBox, 4, positions)
-                                            }
-                                            else if (positions == "vertical") {
-                                                addShip(indexRow, indexBox, 4, positions)
-                                            }
+                                            addShip(indexRow, indexBox, 4, positions)
                                         }
-
                                         else if (human.nameShip === "Destructor") {
-                                            if (positions == "horizontal") {
-                                                addShip(indexRow, indexBox, 3, positions)
-                                            }
-                                            else if (positions == "vertical") {
-                                                addShip(indexRow, indexBox, 3, positions)
-                                            }
+                                            addShip(indexRow, indexBox, 3, positions)
                                         }
-
                                         else if (human.nameShip === "Submarino") {
-                                            if (positions == "horizontal") {
-                                                addShip(indexRow, indexBox, 3, positions)
-                                            }
-                                            else if (positions == "vertical") {
-                                                addShip(indexRow, indexBox, 3, positions)
-                                            }
-
+                                            addShip(indexRow, indexBox, 3, positions)
                                         }
-
                                         else if (human.nameShip === "Bote Patrulla") {
-                                            if (positions == "horizontal") {
-                                                addShip(indexRow, indexBox, 2, positions)
-                                            }
-                                            else if (positions == "vertical") {
-                                                addShip(indexRow, indexBox, 2, positions)
-                                            }
+                                            addShip(indexRow, indexBox, 2, positions)
                                         }
-                                    }} human={human} setState={selectShip}>
+                                    }}>
                                         {box}
                                     </Square>
                                 ))
@@ -186,6 +147,12 @@ const Human = ({ turn }) => {
 }
 
 export default Human
+
+
+
+
+
+
 
 
 
