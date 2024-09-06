@@ -30,21 +30,22 @@ const Human = ({ turn }) => {
                 }
             }
 
-            /* Condiciona para ocupar solo casillas vacías  y para cambia el valor inicial de la variable nameShip */
-            if (boxsInvalids == false) {
+            /* Condiciona para ocupar solo casillas vacías y para no extender la longitud del array */
+            if (boxsInvalids == false && ship < accesCoordinate.length ) {
                 for (let i = indexSecondDimension; i < ship; i++) {
                     accesCoordinate[i] = "" /* Posiciona el barco accediendo a los valores del array de la segunda dimensión */
                 }
-                /* Se cambia el valor con el que se inicializa la variable solo si no se sobreponen barcos.La función setea la propiedad del 
-                estado nameShip cada vez que se hace click en los botones del <ButtonsPositions />. */
-                nameShip = selectShip() 
+                /* Se cambia el valor con el que se inicializa la variable solo si no se sobreponen barcos y no se 
+                extiende la longitud del array accesCoordinate. La función setea la propiedad del estado nameShip 
+                cada vez que se hace click en los botones del <ButtonsPositions />. */
+                nameShip = selectShip()
             }
             else {
-                /* Si se sobre ponen barcos muestra la alerta pero, mantiene en la propiedad del estado el barco que se intento posicionar para 
-                posicionarlo de nuevo correctamente. */
+                /* Si se sobre ponen barcos muestra la alerta pero, mantiene en la propiedad del estado el barco que se 
+                intento posicionar para posicionarlo de nuevo correctamente. */
                 alert("Posicionamiento inválido")
             }
-
+           
             console.log("DESPLIEGUE PIEZAS HUMAN HORIZONTAL", shipCoordinates) 
         }
 
@@ -177,3 +178,4 @@ export default Human
 
 
 
+                    
