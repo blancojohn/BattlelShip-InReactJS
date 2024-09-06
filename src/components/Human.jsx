@@ -10,7 +10,7 @@ const Human = ({ turn }) => {
         /* invalidButtonsPositions: false */
     });
 
-    const [invalidButtonsPositions, setInvalidButtonsPositions]= useState(false);
+    const [invalidButtonsPositions, setInvalidButtonsPositions] = useState(false);
 
     /* Esta función es llamada en el renderizado */
     const addShip = (indexFirstDimension, indexSecondDimension, sizeShip, positionShip) => {
@@ -31,7 +31,7 @@ const Human = ({ turn }) => {
             }
 
             /* Condiciona para ocupar solo casillas vacías y para no extender la longitud del array */
-            if (boxsInvalids == false && ship < accesCoordinate.length ) {
+            if (boxsInvalids == false && ship <= accesCoordinate.length) {
                 for (let i = indexSecondDimension; i < ship; i++) {
                     accesCoordinate[i] = "" /* Posiciona el barco accediendo a los valores del array de la segunda dimensión */
                 }
@@ -45,24 +45,29 @@ const Human = ({ turn }) => {
                 intento posicionar para posicionarlo de nuevo correctamente. */
                 alert("Posicionamiento inválido")
             }
-           
-            console.log("DESPLIEGUE PIEZAS HUMAN HORIZONTAL", shipCoordinates) 
+
+            console.log("DESPLIEGUE PIEZAS HUMAN HORIZONTAL", shipCoordinates)
         }
 
         /* Se ejecuta bloque de código cuando obtiene el parámetro position en la función onAddShip pasada como prop al <Square /> */
         else if (positionShip == "vertical") {
             let ship = indexFirstDimension + sizeShip /* Primer parámetro cual posición y tercer parámetro cuantas posiciones de la misma por cada array en la segunda dimensión */
             let boxsInvalids = false /* Según valor en el que se encuentre no permite que se sobrepongan los barcos */
+            
+            if (ship > 10) { /* Valida la suma de los parámetros en la declaración de la variable ship para que los barcos no pasen el límite vertical */
+                alert("Posicionamineto inválido")
+                return shipCoordinates
+            }
 
-             /* Recorre el tablero para condiconar las posiciones ocupadas */
+            /* Recorre el tablero para condiconar las posiciones ocupadas */
             for (let i = indexFirstDimension; i < ship; i++) {
-                if (shipCoordinates[i][indexSecondDimension] == "") {
+                if (shipCoordinates[i][indexSecondDimension] == "" /* && ship > 10 */) {
                     boxsInvalids = true
                 }
             }
 
             /* Condiciona para ocupar solo casillas vacías  y para cambia el valor inicial de la variable nameShip */
-            if (boxsInvalids == false) {
+            if (boxsInvalids == false /* && ship <= 10 *//* && shipCoordinates[shipCoordinates.length <= 10][indexSecondDimension] */) {
                 for (let i = indexFirstDimension; i < ship; i++) {
                     shipCoordinates[i][indexSecondDimension] = "" /* Posiciona el barco accediendo a la misma posición de la segunda dimensión por cada array de la primera dimensión */
                 }
@@ -71,8 +76,14 @@ const Human = ({ turn }) => {
             else {
                 alert("Posicionamiento inválido")
             }
+            /*             if(shipCoordinates == undefined){
+                            console.log(shipCoordinates)
+                        }
+             */            /* for(let i= 0; i < shipCoordinates.length; i++){
+                           console.log(shipCoordinates[i])
+                       } */
 
-            console.log("DESPLIEGUE PIEZAS HUMAN VERTICAL", shipCoordinates) 
+            console.log("DESPLIEGUE PIEZAS HUMAN VERTICAL", shipCoordinates)
         }
         setHuman({
             board: shipCoordinates, /* Barco poscionado */
@@ -178,4 +189,4 @@ export default Human
 
 
 
-                    
+
