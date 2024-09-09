@@ -1,7 +1,7 @@
 import React from "react";
 import { FaLongArrowAltRight, FaLongArrowAltDown } from "react-icons/fa";
 
-
+/* <ButtonsPositions es hijo de <Square /> en <Human />  */
 const ButtonsPositions = ({ setShipDirectionsArrows, setInvalidButtonsPositions, onAddShip }) => {
    
 

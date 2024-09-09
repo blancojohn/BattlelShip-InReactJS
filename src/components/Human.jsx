@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Square from "./Square";
-import { buildBoard } from "../functions";
 
 
-const Human = ({ turn }) => {
-    const [human, setHuman] = useState({
-        board: buildBoard(), /* Se actualiza con los barcos que se posicionen y los disparos que reciba */
-        nameShip: "Porta Aviones", /* Se actualiza con un tipo de barco distinto cada vez que se coloca un barco en el tablero humano. */
-        /* invalidButtonsPositions: false */
-    });
+
+const Human = ({ turn, human, setHuman }) => {
 
     const [invalidButtonsPositions, setInvalidButtonsPositions] = useState(false);
 
     /* Esta función es llamada en el renderizado */
     const addShip = (indexFirstDimension, indexSecondDimension, sizeShip, positionShip) => {
-        let shipCoordinates = [...human.board] /* Almacena la copia del tablero para acceder a las posiciones en las que se posicionará el barco */
+        let shipCoordinates = [...human.board] 
         let nameShip = human.nameShip /* Inicializa con el nombre actual de la propiedad del estado */
 
         /* Se ejecuta bloque de código cuando obtiene el parámetro position en la función onAddShip pasada como prop <Square /> */
@@ -23,14 +18,14 @@ const Human = ({ turn }) => {
             let ship = indexSecondDimension + sizeShip /* Segundo parámetro inidica a partir de cual posición  y tercer parámetro cuantas posiciones del array previo accedido*/
             let boxsInvalids = false /* Según valor en el que se encuentre no permite que sobreponer barcos */
 
-            /* Recorre el tablero para condiconar las posiciones ocupadas */
+            /* Recorre el tablero para validar las posiciones ocupadas */
             for (let i = indexSecondDimension; i < ship; i++) {
                 if (accesCoordinate[i] == "") {
                     boxsInvalids = true
                 }
             }
 
-            /* Condiciona para ocupar solo casillas vacías y para no extender la longitud del array */
+            /* Valida para ocupar solo casillas vacías y para no extender la longitud del array */
             if (boxsInvalids == false && ship <= accesCoordinate.length) {
                 for (let i = indexSecondDimension; i < ship; i++) {
                     accesCoordinate[i] = "" /* Posiciona el barco accediendo a los valores del array de la segunda dimensión */
@@ -54,7 +49,8 @@ const Human = ({ turn }) => {
             let ship = indexFirstDimension + sizeShip /* Primer parámetro cual posición y tercer parámetro cuantas posiciones de la misma por cada array en la segunda dimensión */
             let boxsInvalids = false /* Según valor en el que se encuentre no permite que se sobrepongan los barcos */
             
-            if (ship > 10) { /* Valida la suma de los parámetros en la declaración de la variable ship para que los barcos no pasen el límite vertical */
+            /* Valida la suma de los parámetros en la declaración de la variable ship para que los barcos no pasen el límite vertical del tablero */
+            if (ship > 10) { 
                 alert("Posicionamineto inválido")
                 return shipCoordinates
             }
@@ -66,8 +62,8 @@ const Human = ({ turn }) => {
                 }
             }
 
-            /* Condiciona para ocupar solo casillas vacías  y para cambia el valor inicial de la variable nameShip */
-            if (boxsInvalids == false /* && ship <= 10 *//* && shipCoordinates[shipCoordinates.length <= 10][indexSecondDimension] */) {
+            /* Valida para ocupar solo casillas vacías  y para cambia el valor inicial de la variable nameShip */
+            if (boxsInvalids == false) {
                 for (let i = indexFirstDimension; i < ship; i++) {
                     shipCoordinates[i][indexSecondDimension] = "" /* Posiciona el barco accediendo a la misma posición de la segunda dimensión por cada array de la primera dimensión */
                 }
@@ -76,17 +72,11 @@ const Human = ({ turn }) => {
             else {
                 alert("Posicionamiento inválido")
             }
-            /*             if(shipCoordinates == undefined){
-                            console.log(shipCoordinates)
-                        }
-             */            /* for(let i= 0; i < shipCoordinates.length; i++){
-                           console.log(shipCoordinates[i])
-                       } */
 
             console.log("DESPLIEGUE PIEZAS HUMAN VERTICAL", shipCoordinates)
         }
         setHuman({
-            board: shipCoordinates, /* Barco poscionado */
+            board: shipCoordinates, /* Barco posicionado */
             nameShip
         })
     }
@@ -104,6 +94,9 @@ const Human = ({ turn }) => {
         else if (human.nameShip == "Submarino") {
             return "Bote Patrulla"
         }
+        else if (human.nameShip == "Bote Patrulla"){
+            return "Haz click en una coordenada del tablero de la máquina para disparar"
+        } 
     }
 
     const getGunShotMachine = () => {
@@ -165,7 +158,14 @@ const Human = ({ turn }) => {
                     ))
                 }
                 <div className="text-center">
-                    <span>Haz clikc en una coordenada para inciar posicionamiento del {human.nameShip}</span>
+                    {
+                        (human.nameShip == "Porta Aviones" || human.nameShip == "Acorazado" || human.nameShip == "Destructor" || human.nameShip == "Submarino" || human.nameShip == "Bote Patrulla") &&
+                            <span>Haz clikc en una coordenada para inciar posicionamiento del {human.nameShip}</span>
+                    }
+                    {
+                        (human.nameShip == "Haz click en una coordenada del tablero de la máquina para disparar") &&
+                            <span>Haz click en una coordenada del tablero de la máquina para disparar</span>
+                    }
                 </div>
             </div>
         </>

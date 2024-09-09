@@ -80,7 +80,7 @@ export const buildBoard = () => {
   return coordinates
 } */
 
-export const getGunShotHuman = (board, indexRow, indexBox) => {
+/* export const getGunShotHuman = (board, indexRow, indexBox) => {
   let coordinates = [...board]
   if (coordinates[indexRow][indexBox] == "") {
     coordinates[indexRow][indexBox] = "Y"
@@ -91,7 +91,7 @@ export const getGunShotHuman = (board, indexRow, indexBox) => {
   console.log("TIRO HUMAN", indexRow, indexBox)
   console.log("VERIFICACIÓN TIRO HUMAN", coordinates[indexRow][indexBox])
   return coordinates
-}
+} */
 
 export const addColorsActions = (children) => {
   let colorAction = ""

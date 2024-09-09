@@ -1,10 +1,29 @@
 import React, { useState } from "react";
 import Square from "./Square";
-import { buildBoard, getGunShotHuman } from "../functions";
+import { buildBoard } from "../functions";
 
-const Machine = ({ setTurn }) => {
 
+const Machine = ({ setTurn, human }) => {
     const [boardMachine, setBoardMachine] = useState(buildBoard());
+
+    const getGunShotHuman = (indexRow, indexBox) => {
+        if(human.nameShip == "Haz click en una coordenada del tablero de la máquina para disparar"){
+            let shotCoordinates = [...boardMachine]
+            if (shotCoordinates[indexRow][indexBox] == "") {
+                shotCoordinates[indexRow][indexBox] = "Y"
+            }
+            else if (shotCoordinates[indexRow][indexBox] == null) {
+                shotCoordinates[indexRow][indexBox] = "N"
+            }
+            console.log("TIRO HUMAN", indexRow, indexBox)
+            console.log("VERIFICACIÓN TIRO HUMAN", shotCoordinates[indexRow][indexBox])
+            setTurn(prevCount => prevCount + 1)
+            setBoardMachine(shotCoordinates)
+        }
+        else{
+            alert("Debes posicionar todos tus barcos")
+        }
+    }
 
     return (
         <>
@@ -16,7 +35,7 @@ const Machine = ({ setTurn }) => {
                         <span key={indexRow}>
                             {
                                 row.map((box, indexBox) => (
-                                    <Square key={indexBox} get={() => { setBoardMachine(getGunShotHuman(boardMachine, indexRow, indexBox)), setTurn(prevCount => prevCount + 1) }}>{box}</Square>
+                                    <Square key={indexBox} onGetShotHuman={() => {getGunShotHuman(indexRow, indexBox) }} boardMachine={boardMachine}>{box}</Square>
                                 ))
                             }
                         </span>
