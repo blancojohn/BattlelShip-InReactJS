@@ -37,7 +37,7 @@ const Square = ({ children, human, boardMachine, onGetShotHuman, onAddShip, inva
     return (
         <>
             <div id="box" type="button" className={colorAction} onClick={validStatesandActions}>
-                <span className={`${(children === "Y" || children === "N") || children === 0 ? "childrenBox" : Number}`}>
+                <span className={`${(children == "Y" || children == "N") ? "childrenBox" : Number} d-flex justify-content-center`}>
                     {children}
                 </span>
             </div>

@@ -2,7 +2,7 @@
 
 export const buildBoard = () => {
   let board = [
-    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    ["BS",1, 2, 3, 4, 5, 6, 7, 8, 9],
     [1, null, null, null, null, null, null, null, null, null],
     [2, null, null, null, null, null, null, null, null, null],
     [3, null, null, null, null, null, null, null, null, null],

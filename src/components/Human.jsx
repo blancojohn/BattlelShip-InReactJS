@@ -38,7 +38,8 @@ const Human = ({ turn, human, setHuman }) => {
             else {
                 /* Si se sobre ponen barcos muestra la alerta pero, mantiene en la propiedad del estado el barco que se 
                 intento posicionar para posicionarlo de nuevo correctamente. */
-                alert("Posicionamiento inválido")
+                alert("Posicionamiento inválido. Repetir")
+                return human.board
             }
 
             console.log("DESPLIEGUE PIEZAS HUMAN HORIZONTAL", shipCoordinates)
@@ -51,8 +52,8 @@ const Human = ({ turn, human, setHuman }) => {
             
             /* Valida la suma de los parámetros en la declaración de la variable ship para que los barcos no pasen el límite vertical del tablero */
             if (ship > 10) { 
-                alert("Posicionamineto inválido")
-                return shipCoordinates
+                alert("Posicionamineto inválido. Repetir")
+                return human.board
             }
 
             /* Recorre el tablero para condiconar las posiciones ocupadas */
@@ -70,7 +71,8 @@ const Human = ({ turn, human, setHuman }) => {
                 nameShip = selectShip()
             }
             else {
-                alert("Posicionamiento inválido")
+                alert("Posicionamiento inválido. Repetir")
+                return human.board
             }
 
             console.log("DESPLIEGUE PIEZAS HUMAN VERTICAL", shipCoordinates)
@@ -99,21 +101,27 @@ const Human = ({ turn, human, setHuman }) => {
         } 
     }
 
+    /* Función que permite recibir disparo en tablero de machine solo en casillas disponibles según validaciones a continuación */
     const getGunShotMachine = () => {
-        let coordinates = [...human.board];
-        let indexRow = Math.floor(Math.random() * 9);
-        let indexBox = Math.floor(Math.random() * 9);
-        if (coordinates[indexRow][indexBox] == "") {
-            coordinates[indexRow][indexBox] = "Y"
+        let shotCoordinates = [...human.board];
+        let indexRow = Math.floor(Math.random() * 10);
+        let indexBox = Math.floor(Math.random() * 10);
+        if (shotCoordinates[indexRow][indexBox] == "") {
+            shotCoordinates[indexRow][indexBox] = "Y"
         }
-        else if (coordinates[indexRow][indexBox] == null) {
-            coordinates[indexRow][indexBox] = "N"
+        else if (shotCoordinates[indexRow][indexBox] == null) {
+            shotCoordinates[indexRow][indexBox] = "N"
+        }
+        else{
+            getGunShotMachine()
+            return human.board
         }
         console.log("TIRO DE MACHINE", indexRow, indexBox)
-        console.log("VERIFICACIÓN DE TIRO MACHINE", coordinates[indexRow][indexBox])
-        return coordinates
+        console.log("VERIFICACIÓN DE TIRO MACHINE", shotCoordinates[indexRow][indexBox])
+        return shotCoordinates
     }
 
+    /* Permite recibir el disparo de machine luego de disparar a su tablero porque setea turn */
     useEffect(() => {
         if (turn != 0) {
             setHuman({

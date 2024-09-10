@@ -6,23 +6,31 @@ import { buildBoard } from "../functions";
 const Machine = ({ setTurn, human }) => {
     const [boardMachine, setBoardMachine] = useState(buildBoard());
 
+    /* Permite recibir disparos en el tablero de machine solo en casillas disponibles según validaciones a continuación */
     const getGunShotHuman = (indexRow, indexBox) => {
-        if(human.nameShip == "Haz click en una coordenada del tablero de la máquina para disparar"){
-            let shotCoordinates = [...boardMachine]
-            if (shotCoordinates[indexRow][indexBox] == "") {
-                shotCoordinates[indexRow][indexBox] = "Y"
-            }
-            else if (shotCoordinates[indexRow][indexBox] == null) {
-                shotCoordinates[indexRow][indexBox] = "N"
-            }
-            console.log("TIRO HUMAN", indexRow, indexBox)
-            console.log("VERIFICACIÓN TIRO HUMAN", shotCoordinates[indexRow][indexBox])
-            setTurn(prevCount => prevCount + 1)
-            setBoardMachine(shotCoordinates)
+        let shotCoordinates = [...boardMachine]
+        /* Validación para disparar luego del posicionamiento de los barcos del humano */
+        if(human.nameShip != "Haz click en una coordenada del tablero de la máquina para disparar"){
+            alert("Debes posicionar todos tus barcos")
+            return boardMachine
+        }
+
+        if(shotCoordinates[indexRow][indexBox] == "") {
+            shotCoordinates[indexRow][indexBox] = "Y"
+        }
+        else if (shotCoordinates[indexRow][indexBox] == null) {
+            shotCoordinates[indexRow][indexBox] = "N"
         }
         else{
-            alert("Debes posicionar todos tus barcos")
+            alert("¡Disparo inválido. Repetir!")
+            return human.board
         }
+        
+        console.log("TIRO HUMAN", indexRow, indexBox)
+        console.log("VERIFICACIÓN TIRO HUMAN", shotCoordinates[indexRow][indexBox])
+        /* Al setear turn permite que el tablero humano reciba un disparo de machine  */
+        setTurn(prevCount => prevCount + 1)
+        setBoardMachine(shotCoordinates)
     }
 
     return (
