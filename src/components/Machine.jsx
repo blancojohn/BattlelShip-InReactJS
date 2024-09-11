@@ -27,11 +27,13 @@ const Machine = ({ setTurn, human }) => {
         }
         
         console.log("TIRO HUMAN", indexRow, indexBox)
-        console.log("VERIFICACIÓN TIRO HUMAN", shotCoordinates[indexRow][indexBox])
+        console.log("VERIFICACIÓN TIRO HUMAN", shotCoordinates[indexRow][indexBox]) 
         /* Al setear turn permite que el tablero humano reciba un disparo de machine  */
         setTurn(prevCount => prevCount + 1)
         setBoardMachine(shotCoordinates)
     }
+
+    
 
     return (
         <>

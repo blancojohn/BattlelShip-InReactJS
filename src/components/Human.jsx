@@ -6,6 +6,7 @@ import Square from "./Square";
 const Human = ({ turn, human, setHuman }) => {
 
     const [invalidButtonsPositions, setInvalidButtonsPositions] = useState(false);
+    const [winMachine, setWinMachine]= useState(1);
 
     /* Esta función es llamada en el renderizado */
     const addShip = (indexFirstDimension, indexSecondDimension, sizeShip, positionShip) => {
@@ -108,6 +109,7 @@ const Human = ({ turn, human, setHuman }) => {
         let indexBox = Math.floor(Math.random() * 10);
         if (shotCoordinates[indexRow][indexBox] == "") {
             shotCoordinates[indexRow][indexBox] = "Y"
+            countShotAcert()
         }
         else if (shotCoordinates[indexRow][indexBox] == null) {
             shotCoordinates[indexRow][indexBox] = "N"
@@ -116,10 +118,19 @@ const Human = ({ turn, human, setHuman }) => {
             getGunShotMachine()
             return human.board
         }
+        
         console.log("TIRO DE MACHINE", indexRow, indexBox)
-        console.log("VERIFICACIÓN DE TIRO MACHINE", shotCoordinates[indexRow][indexBox])
+        console.log("VERIFICACIÓN DE TIRO MACHINE", shotCoordinates[indexRow][indexBox]) 
         return shotCoordinates
     }
+
+    const countShotAcert= ()=>{
+        if(winMachine == 17){
+            alert("Ganó Machine")
+        }
+        setWinMachine(countShot => countShot + 1)
+    }
+    
 
     /* Permite recibir el disparo de machine luego de disparar a su tablero porque setea turn */
     useEffect(() => {
@@ -129,7 +140,6 @@ const Human = ({ turn, human, setHuman }) => {
                 ...human
             })
         }
-
     }, [turn])
 
     return (
