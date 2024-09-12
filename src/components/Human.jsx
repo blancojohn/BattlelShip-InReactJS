@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Square from "./Square";
+import Messagge from "./Messagge";
 
 
 
-const Human = ({ turn, human, setHuman }) => {
+const Human = ({ turn, human, setHuman, winHuman, setWinMachine }) => {
 
     const [invalidButtonsPositions, setInvalidButtonsPositions] = useState(false);
-    const [winMachine, setWinMachine]= useState(1);
-
+    
     /* Esta función es llamada en el renderizado */
     const addShip = (indexFirstDimension, indexSecondDimension, sizeShip, positionShip) => {
         let shipCoordinates = [...human.board] 
@@ -102,19 +102,22 @@ const Human = ({ turn, human, setHuman }) => {
         } 
     }
 
-    /* Función que permite recibir disparo en tablero de machine solo en casillas disponibles según validaciones a continuación */
+    /* Función que permite recibir disparo en tablero del humano solo en casillas disponibles según validaciones a continuación */
     const getGunShotMachine = () => {
         let shotCoordinates = [...human.board];
         let indexRow = Math.floor(Math.random() * 10);
         let indexBox = Math.floor(Math.random() * 10);
+        /* El "" es parte de un barco posicionado, al recibir un disparo el valor cambia "Y" y setea winMachine */
         if (shotCoordinates[indexRow][indexBox] == "") {
             shotCoordinates[indexRow][indexBox] = "Y"
-            countShotAcert()
+            setWinMachine(countShot => countShot + 1)
         }
+        /* Los null son casillas sin partes de barcos, al recibir un disparo cambia a "N" */
         else if (shotCoordinates[indexRow][indexBox] == null) {
             shotCoordinates[indexRow][indexBox] = "N"
         }
         else{
+        /* Evita recibir un disparo en casillas que han recibido disparos */
             getGunShotMachine()
             return human.board
         }
@@ -124,17 +127,10 @@ const Human = ({ turn, human, setHuman }) => {
         return shotCoordinates
     }
 
-    const countShotAcert= ()=>{
-        if(winMachine == 17){
-            alert("Ganó Machine")
-        }
-        setWinMachine(countShot => countShot + 1)
-    }
-    
-
-    /* Permite recibir el disparo de machine luego de disparar a su tablero porque setea turn */
+    /* Permite recibir el disparo de machine luego de disparar a su tablero porque seteando turn y valida para que machine no ejecute disparos 
+    cuando gana la persona */
     useEffect(() => {
-        if (turn != 0) {
+        if (turn != 0 && winHuman != 17) {
             setHuman({
                 board: getGunShotMachine(),
                 ...human
@@ -143,8 +139,9 @@ const Human = ({ turn, human, setHuman }) => {
     }, [turn])
 
     return (
-        <>
+        <>  
             <div id="board">
+            <Messagge>Human</Messagge>
                 {
                     (human.board != null) &&
                     human.board.map((row, indexRow) => (
@@ -178,11 +175,11 @@ const Human = ({ turn, human, setHuman }) => {
                 <div className="text-center">
                     {
                         (human.nameShip == "Porta Aviones" || human.nameShip == "Acorazado" || human.nameShip == "Destructor" || human.nameShip == "Submarino" || human.nameShip == "Bote Patrulla") &&
-                            <span>Haz clikc en una coordenada para inciar posicionamiento del {human.nameShip}</span>
+                            <Messagge>Haz clikc en una coordenada para inciar posicionamiento del {human.nameShip}</Messagge>
                     }
                     {
                         (human.nameShip == "Haz click en una coordenada del tablero de la máquina para disparar") &&
-                            <span>Haz click en una coordenada del tablero de la máquina para disparar</span>
+                            <Messagge>Haz click en una coordenada del tablero de la máquina para disparar</Messagge>
                     }
                 </div>
             </div>
