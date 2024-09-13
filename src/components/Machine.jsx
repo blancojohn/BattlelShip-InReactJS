@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Square from "./Square";
-import { boardM } from "../functions";
 import Messagge from "./Messagge";
 
 
-const Machine = ({ setTurn, human, winMachine, winHuman, setWinHuman }) => {
-    const [boardMachine, setBoardMachine] = useState(boardM);
+const Machine = ({ boardMachine, setBoardMachine, setTurn, human, winMachine, setWinMachine, winHuman, setWinHuman, newGameMachine, setNewGameMachine/* , shipsMachine, setShipsMachine  */}) => {
 
     /* Permite recibir disparos en el tablero de machine solo en casillas disponibles según validaciones a continuación */
     const getGunShotHuman = (indexRow, indexBox) => {
@@ -48,7 +46,7 @@ const Machine = ({ setTurn, human, winMachine, winHuman, setWinHuman }) => {
                         <span key={indexRow}>
                             {
                                 row.map((box, indexBox) => (
-                                    <Square key={indexBox} onGetShotHuman={() => {if(winMachine != 17 && winHuman != 17)getGunShotHuman(indexRow, indexBox)}} boardMachine={boardMachine}>{box}</Square>
+                                    <Square key={indexBox} onGetShotHuman={() => {if(winMachine != 17 && winHuman != 17)getGunShotHuman(indexRow, indexBox)}} boardMachine={boardMachine}  newGameMachine={newGameMachine} setNewGameMachine={setNewGameMachine} winMachine={winMachine} setWinMachine={setWinMachine}/* shipsMachine={shipsMachine} setShipsMachine={setShipsMachine} */>{box}</Square>
                                 ))
                             }
                         </span>

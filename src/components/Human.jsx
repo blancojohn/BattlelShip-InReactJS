@@ -4,8 +4,7 @@ import Messagge from "./Messagge";
 
 
 
-const Human = ({ turn, human, setHuman, winHuman, setWinMachine }) => {
-
+const Human = ({ turn, human, setHuman, winHuman, setWinMachine, newGameHuman, setNewGameHuman }) => {
     const [invalidButtonsPositions, setInvalidButtonsPositions] = useState(false);
     
     /* Esta función es llamada en el renderizado */
@@ -164,7 +163,7 @@ const Human = ({ turn, human, setHuman, winHuman, setWinMachine }) => {
                                         else if (human.nameShip === "Bote Patrulla") {
                                             addShip(indexRow, indexBox, 2, positions)
                                         }
-                                    }} invalidButtonsPositions={invalidButtonsPositions} setInvalidButtonsPositions={setInvalidButtonsPositions}>
+                                    }} invalidButtonsPositions={invalidButtonsPositions} setInvalidButtonsPositions={setInvalidButtonsPositions} newGameHuman={newGameHuman} setNewGameHuman={setNewGameHuman}>
                                         {box}
                                     </Square>
                                 ))
@@ -179,7 +178,7 @@ const Human = ({ turn, human, setHuman, winHuman, setWinMachine }) => {
                     }
                     {
                         (human.nameShip == "Haz click en una coordenada del tablero de la máquina para disparar") &&
-                            <Messagge>Haz click en una coordenada del tablero de la máquina para disparar</Messagge>
+                            <Messagge>Dispara haciendo click en una casilla del enemigo</Messagge>
                     }
                 </div>
             </div>
