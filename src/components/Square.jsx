@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import ButtonsPositions from "./ButtonsPositions";
 
 /* <Square /> es hijo de <Human /> y <Machine /> */
-const Square = ({ children, human, boardMachine, onGetShotHuman, onAddShip, invalidButtonsPositions, setInvalidButtonsPositions, newGameHuman, setNewGameHuman, newGameMachine, setNewGameMachine, winMachine/* , shipsMachine, setShipsMachine */ }) => {
+const Square = ({ children, human, boardMachine, onGetShotHuman, onAddShip, invalidButtonsPositions, setInvalidButtonsPositions, newGameHuman, setNewGameHuman, newGameMachine, setNewGameMachine, shipsMachine }) => {
     const [colorAction, setColorAction] = useState("btn btn-light");
     const [shipDirectionsArrows, setShipDirectionsArrows] = useState(false);/* Cada <Square /> tiene un estado independiente para mostrar u ocultar al hijo <ButtonsPositions /> en <Human />. */
 
     const addColorsActions = (children) => {
         let colorAction = ""
-        /* Primera condición para solo se vean los barcos posicionados del humano */
+        /* Validación para ver posicionados los barcos en el tablero humano  */
         if (human && children == "") {
             colorAction = "btn btn-dark"
         }
@@ -21,7 +21,13 @@ const Square = ({ children, human, boardMachine, onGetShotHuman, onAddShip, inva
         else {
             colorAction = "btn btn-light"
         }
-        if ( boardMachine && winMachine == 17 && children == "") {
+
+        /* Validación para no mostrar posicionados los barcos en el tablero machine */
+        if (boardMachine && shipsMachine == "Mostrar barcos" && children == "") {
+            colorAction = "btn btn-light"
+        }
+        /* Muestra los barcos posicionados si se presiona el botón  */
+        if (boardMachine && shipsMachine == "Ocultar barcos" && children == "") {
             colorAction = "btn btn-dark"
         }
         return colorAction
@@ -61,7 +67,7 @@ const Square = ({ children, human, boardMachine, onGetShotHuman, onAddShip, inva
             setColorAction("btn btn-light")
             setNewGameMachine(false)
         }
-    }, [children])
+    }, [children, shipsMachine])/* se ejecuta cada vez que ocurren acciones en los tableros o si muestran u ocultan los barcos de machine */
 
     return (
         <>
