@@ -1,10 +1,57 @@
-import React, {useState} from "react";
+import React, { useEffect, useRef } from "react";
 import Square from "./Square";
 import Messagge from "./Messagge";
 
 
 const Machine = ({ boardMachine, setBoardMachine, setTurn, human, winMachine, winHuman, setWinHuman, newGameMachine, setNewGameMachine, shipsMachine, setShipsMachine }) => {
-    
+
+    const addShipsHorizontal = (sizeShip) => {
+        let shipCoordinnates = [...boardMachine]
+        let firstDimension = Math.floor(Math.random() * 10)
+        let accesDimension = shipCoordinnates[firstDimension]
+        let secondDimension = Math.floor(Math.random() * 10)
+        let shipPosition = secondDimension + sizeShip
+        let boxsInvalids = false
+
+        /* Recorre el array para validar coordenadas ocupadas */
+        for (let i = secondDimension; i < shipPosition; i++) {
+            if (accesDimension[i] == "") {
+                boxsInvalids = true
+            }
+        }
+
+        /* Valida para no exceder los límites del tablero posiconando un barco y mientras las casillas estén disponibles */
+        if (boxsInvalids == false && shipPosition <= accesDimension.length) {
+            for (let i = secondDimension; i < shipPosition; i++) {
+                accesDimension[i] = ""
+            }
+        }
+        else {
+            addShipsHorizontal(sizeShip)
+        }
+        return shipCoordinnates
+    }
+
+    const shipAmount = useRef(0)
+
+    useEffect(() => {
+        if (shipAmount.current == 0) {
+            addShipsHorizontal(5)
+            addShipsHorizontal(4)
+            addShipsHorizontal(3)
+            addShipsHorizontal(3)
+            addShipsHorizontal(2)
+            shipAmount.current = 1
+        }
+        if (newGameMachine == true) {
+            addShipsHorizontal(5)
+            addShipsHorizontal(4)
+            addShipsHorizontal(3)
+            addShipsHorizontal(3)
+            addShipsHorizontal(2)
+        }
+    }, [boardMachine])
+
     /* Permite recibir disparos en el tablero de machine solo en casillas disponibles según validaciones a continuación */
     const getGunShotHuman = (indexRow, indexBox) => {
         let shotCoordinates = [...boardMachine]
@@ -36,14 +83,14 @@ const Machine = ({ boardMachine, setBoardMachine, setTurn, human, winMachine, wi
     }
 
     /* De acuerdo al valor con el que se encuentre el estado permite ver los barcos posicionados porque <Square /> lo accede */
-    const changeState= ()=>{
+    const changeState = () => {
         (shipsMachine == "Mostrar barcos") ? setShipsMachine("Ocultar barcos") : setShipsMachine("Mostrar barcos")
-    } 
+    }
 
     return (
         <>
             <div id="board">
-            <Messagge>Machine</Messagge>
+                <Messagge>Machine</Messagge>
                 {/* TABLERO MACHINE */}
                 {
                     (boardMachine != null) &&
@@ -51,14 +98,14 @@ const Machine = ({ boardMachine, setBoardMachine, setTurn, human, winMachine, wi
                         <span key={indexRow}>
                             {
                                 row.map((box, indexBox) => (
-                                    <Square key={indexBox} onGetShotHuman={() => {if(winMachine != 17 && winHuman != 17)getGunShotHuman(indexRow, indexBox)}} boardMachine={boardMachine}  newGameMachine={newGameMachine} setNewGameMachine={setNewGameMachine} shipsMachine={shipsMachine}>{box}</Square>
+                                    <Square key={indexBox} onGetShotHuman={() => { if (winMachine != 17 && winHuman != 17) getGunShotHuman(indexRow, indexBox) }} boardMachine={boardMachine} newGameMachine={newGameMachine} setNewGameMachine={setNewGameMachine} shipsMachine={shipsMachine}>{box}</Square>
                                 ))
                             }
                         </span>
                     ))
                 }
                 <div className="d-flex justify-content-center mt-2">
-                    <button onClick={changeState} className="btn btn-primary">{shipsMachine}</button> 
+                    <button onClick={changeState} className="btn btn-primary">{shipsMachine}</button>
                 </div>
             </div>
         </>

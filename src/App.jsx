@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Human from "./components/Human";
 import Machine from "./components/Machine";
-import { buildBoard, firstBoardMachine, secondBoardMachine } from "./functions";
+import { buildBoard/* , firstBoardMachine, secondBoardMachine */ } from "./functions";
 import Messagge from "./components/Messagge";
 import { GrUpdate } from "react-icons/gr";
 
@@ -13,7 +13,7 @@ const App = () => {
     const [turn, setTurn] = useState(0); /* Permite el intercambio de disparos */
     const [winHuman, setWinHuman] = useState(0); /* En 17 declara victoria */
     const [winMachine, setWinMachine] = useState(0); /* En 17 declara victoria */
-    const [boardMachine, setBoardMachine] = useState(firstBoardMachine);
+    const [boardMachine, setBoardMachine] = useState(buildBoard())
     const [human, setHuman] = useState({
         board: buildBoard(), /* Se actualiza con los barcos que se posicionen y los disparos que reciba la persona*/
         nameShip: "Porta Aviones", /* Se actualiza con un tipo de barco distinto cada vez que se coloca un barco en el tablero humano. */
@@ -26,8 +26,8 @@ const App = () => {
         setTurn(0)
         setWinHuman(0)
         setWinMachine(0)
-        setBoardMachine(secondBoardMachine)
         setShipsMachine("Mostrar barcos")
+        setBoardMachine(buildBoard())
         setHuman({
             board: buildBoard(),
             nameShip: "Porta Aviones"

@@ -58,7 +58,7 @@ const Human = ({ turn, human, setHuman, winHuman, setWinMachine, newGameHuman, s
 
             /* Recorre el tablero para condiconar las posiciones ocupadas */
             for (let i = indexFirstDimension; i < ship; i++) {
-                if (shipCoordinates[i][indexSecondDimension] == "" /* && ship > 10 */) {
+                if (shipCoordinates[i][indexSecondDimension] == "") {
                     boxsInvalids = true
                 }
             }
