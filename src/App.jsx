@@ -51,7 +51,6 @@ const App = () => {
             }
             <div className="d-flex">
                 <Human turn={turn} human={human} setHuman={setHuman} winHuman={winHuman} setWinMachine={setWinMachine} newGameHuman={newGameHuman} setNewGameHuman={setNewGameHuman}/>
-
                 {/* Recibe el estado de human para validar disparo después de que la persona posicione todos sus barcos  */}
                 {/* Recibe los estados winMachine y WinHuman para validar que la persona no siga disparando cuando gana o pierde */}
                 <Machine setTurn={setTurn} boardMachine={boardMachine} setBoardMachine={setBoardMachine} human={human} winMachine={winMachine} winHuman={winHuman} setWinHuman={setWinHuman} newGameMachine={newGameMachine} setNewGameMachine={setNewGameMachine} shipsMachine={shipsMachine} setShipsMachine={setShipsMachine}/>

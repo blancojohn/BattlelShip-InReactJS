@@ -6,10 +6,10 @@ import Messagge from "./Messagge";
 
 const Human = ({ turn, human, setHuman, winHuman, setWinMachine, newGameHuman, setNewGameHuman }) => {
     const [invalidButtonsPositions, setInvalidButtonsPositions] = useState(false);
-    
+
     /* Esta función es llamada en el renderizado */
     const addShip = (indexFirstDimension, indexSecondDimension, sizeShip, positionShip) => {
-        let shipCoordinates = [...human.board] 
+        let shipCoordinates = [...human.board]
         let nameShip = human.nameShip /* Inicializa con el nombre actual de la propiedad del estado */
 
         /* Se ejecuta bloque de código cuando obtiene el parámetro position en la función onAddShip pasada como prop <Square /> */
@@ -49,9 +49,9 @@ const Human = ({ turn, human, setHuman, winHuman, setWinMachine, newGameHuman, s
         else if (positionShip == "vertical") {
             let ship = indexFirstDimension + sizeShip /* Primer parámetro cual posición y tercer parámetro cuantas posiciones de la misma por cada array en la segunda dimensión */
             let boxsInvalids = false /* Según valor en el que se encuentre no permite que se sobrepongan los barcos */
-            
+
             /* Valida la suma de los parámetros en la declaración de la variable ship para que los barcos no pasen el límite vertical del tablero */
-            if (ship > 10) { 
+            if (ship > 10) {
                 alert("Posicionamineto inválido. Repetir")
                 return human.board
             }
@@ -96,16 +96,16 @@ const Human = ({ turn, human, setHuman, winHuman, setWinMachine, newGameHuman, s
         else if (human.nameShip == "Submarino") {
             return "Bote Patrulla"
         }
-        else if (human.nameShip == "Bote Patrulla"){
+        else if (human.nameShip == "Bote Patrulla") {
             return "Haz click en una coordenada del tablero de la máquina para disparar"
-        } 
+        }
     }
 
     /* Función que permite recibir disparo en tablero del humano solo en casillas disponibles según validaciones a continuación */
     const getGunShotMachine = () => {
         let shotCoordinates = [...human.board];
-        let indexRow = Math.floor(Math.random() * 10);
-        let indexBox = Math.floor(Math.random() * 10);
+        let indexRow = Math.floor(Math.random() * 9);
+        let indexBox = Math.floor(Math.random() * 9);
         /* El "" es parte de un barco posicionado, al recibir un disparo el valor cambia "Y" y setea winMachine */
         if (shotCoordinates[indexRow][indexBox] == "") {
             shotCoordinates[indexRow][indexBox] = "Y"
@@ -115,14 +115,14 @@ const Human = ({ turn, human, setHuman, winHuman, setWinMachine, newGameHuman, s
         else if (shotCoordinates[indexRow][indexBox] == null) {
             shotCoordinates[indexRow][indexBox] = "N"
         }
-        else{
-        /* Evita recibir un disparo en casillas que han recibido disparos */
+        else {
+            /* Evita recibir un disparo en casillas que han recibido disparos */
             getGunShotMachine()
             return human.board
         }
-        
+
         console.log("TIRO DE MACHINE", indexRow, indexBox)
-        console.log("VERIFICACIÓN DE TIRO MACHINE", shotCoordinates[indexRow][indexBox]) 
+        console.log("VERIFICACIÓN DE TIRO MACHINE", shotCoordinates[indexRow][indexBox])
         return shotCoordinates
     }
 
@@ -138,13 +138,27 @@ const Human = ({ turn, human, setHuman, winHuman, setWinMachine, newGameHuman, s
     }, [turn])
 
     return (
-        <>  
+        <>
             <div id="board">
-            <Messagge>Human</Messagge>
+            <Messagge>Human</Messagge> 
+                <div className="d-flex">
+                    {
+                        [" ", 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => (
+                            <div key={index} id="box" type="button" className="btn btn-light">
+                                {item}
+                            </div>
+                        ))
+                    }
+                </div>
+                
                 {
                     (human.board != null) &&
                     human.board.map((row, indexRow) => (
                         <span key={indexRow}>
+                            <div id="box" type="button" className="btn btn-light">
+                                {indexRow + 1}
+                            </div>
+
                             {
                                 row.map((box, indexBox) => (
                                     <Square key={indexBox} human={human} onAddShip={(positions) => {
@@ -174,11 +188,11 @@ const Human = ({ turn, human, setHuman, winHuman, setWinMachine, newGameHuman, s
                 <div className="text-center">
                     {
                         (human.nameShip == "Porta Aviones" || human.nameShip == "Acorazado" || human.nameShip == "Destructor" || human.nameShip == "Submarino" || human.nameShip == "Bote Patrulla") &&
-                            <Messagge>Haz clikc en una coordenada para inciar posicionamiento del {human.nameShip}</Messagge>
+                        <Messagge>Haz clikc en una coordenada para inciar posicionamiento del {human.nameShip}</Messagge>
                     }
                     {
                         (human.nameShip == "Haz click en una coordenada del tablero de la máquina para disparar") &&
-                            <Messagge>Dispara haciendo click en una casilla del enemigo</Messagge>
+                        <Messagge>Dispara haciendo click en una casilla del enemigo</Messagge>
                     }
                 </div>
             </div>

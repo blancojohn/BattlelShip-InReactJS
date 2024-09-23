@@ -7,9 +7,9 @@ const Machine = ({ boardMachine, setBoardMachine, setTurn, human, winMachine, wi
 
     const addShipsHorizontal = (sizeShip) => {
         let shipCoordinnates = [...boardMachine]
-        let firstDimension = Math.floor(Math.random() * 10)
+        let firstDimension = Math.floor(Math.random() * 9)
         let accesDimension = shipCoordinnates[firstDimension]
-        let secondDimension = Math.floor(Math.random() * 10)
+        let secondDimension = Math.floor(Math.random() * 9)
         let shipPosition = secondDimension + sizeShip
         let boxsInvalids = false
 
@@ -91,11 +91,24 @@ const Machine = ({ boardMachine, setBoardMachine, setTurn, human, winMachine, wi
         <>
             <div id="board">
                 <Messagge>Machine</Messagge>
-                {/* TABLERO MACHINE */}
+                <div className="d-flex">
+                    {
+                        [" ", 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => (
+                            <div key={index} id="box" type="button" className="btn btn-light">
+                                {item}
+                            </div>
+                        ))
+                    }
+                </div>
+
                 {
                     (boardMachine != null) &&
                     boardMachine.map((row, indexRow) => (
                         <span key={indexRow}>
+                            <div id="box" type="button" className="btn btn-light">
+                                {indexRow + 1}
+                            </div>
+                            
                             {
                                 row.map((box, indexBox) => (
                                     <Square key={indexBox} onGetShotHuman={() => { if (winMachine != 17 && winHuman != 17) getGunShotHuman(indexRow, indexBox) }} boardMachine={boardMachine} newGameMachine={newGameMachine} setNewGameMachine={setNewGameMachine} shipsMachine={shipsMachine}>{box}</Square>

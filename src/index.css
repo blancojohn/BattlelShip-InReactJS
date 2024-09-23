@@ -3,7 +3,6 @@
   display: grid;
   grid-template-columns: repeat(10, 1 fr);
   color: brown;
-  justify-content: start;
   width: 300px;
   height: 300px;
   margin-left: 160px;
@@ -29,6 +28,4 @@
   position: absolute; 
   z-index: 1;
 }
-
-
 
