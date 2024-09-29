@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import Human from "./components/Human";
 import Machine from "./components/Machine";
-import { buildBoard/* , firstBoardMachine, secondBoardMachine */ } from "./functions";
+import { buildBoard } from "./board";
 import Messagge from "./components/Messagge";
 import { GrUpdate } from "react-icons/gr";
 
 
 const App = () => {
     const [shipsMachine, setShipsMachine]= useState("Mostrar barcos")
-    const [newGameHuman, setNewGameHuman]= useState(false)/* <Squre /> accede para setear el estado a true y limpiar las casillas en el tablero humano */
-    const [newGameMachine, setNewGameMachine]= useState(false)/* <Squre /> accede para setear el estado a true y limpiar las casillas en el tablero machine */
+    const [newGameHuman, setNewGameHuman]= useState(false)/* <Square /> accede para setear el estado a true y limpiar las casillas en el tablero humano */
+    const [newGameMachine, setNewGameMachine]= useState(false)/* <Square /> accede para setear el estado a true y limpiar las casillas en el tablero machine */
     const [turn, setTurn] = useState(0); /* Permite el intercambio de disparos */
     const [winHuman, setWinHuman] = useState(0); /* En 17 declara victoria */
     const [winMachine, setWinMachine] = useState(0); /* En 17 declara victoria */
@@ -51,8 +51,8 @@ const App = () => {
             }
             <div className="d-flex">
                 <Human turn={turn} human={human} setHuman={setHuman} winHuman={winHuman} setWinMachine={setWinMachine} newGameHuman={newGameHuman} setNewGameHuman={setNewGameHuman}/>
-                {/* Recibe el estado de human para validar disparo después de que la persona posicione todos sus barcos  */}
-                {/* Recibe los estados winMachine y WinHuman para validar que la persona no siga disparando cuando gana o pierde */}
+
+                {/* Recibe los estados winMachine y WinHuman para validar que la persona no siga disparando cuando gana o pierde y Recibe el estado de human para validar disparo después de que la persona posicione todos sus barcos */}
                 <Machine setTurn={setTurn} boardMachine={boardMachine} setBoardMachine={setBoardMachine} human={human} winMachine={winMachine} winHuman={winHuman} setWinHuman={setWinHuman} newGameMachine={newGameMachine} setNewGameMachine={setNewGameMachine} shipsMachine={shipsMachine} setShipsMachine={setShipsMachine}/>
             </div>
         </>

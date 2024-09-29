@@ -6,9 +6,9 @@ import Messagge from "./Messagge";
 const Machine = ({ boardMachine, setBoardMachine, setTurn, human, winMachine, winHuman, setWinHuman, newGameMachine, setNewGameMachine, shipsMachine, setShipsMachine }) => {
 
     const addShipsHorizontal = (sizeShip) => {
-        let shipCoordinnates = [...boardMachine]
+        let shipCoordinates = [...boardMachine]
         let firstDimension = Math.floor(Math.random() * 9)
-        let accesDimension = shipCoordinnates[firstDimension]
+        let accesDimension = shipCoordinates[firstDimension]
         let secondDimension = Math.floor(Math.random() * 9)
         let shipPosition = secondDimension + sizeShip
         let boxsInvalids = false
@@ -29,7 +29,36 @@ const Machine = ({ boardMachine, setBoardMachine, setTurn, human, winMachine, wi
         else {
             addShipsHorizontal(sizeShip)
         }
-        return shipCoordinnates
+        return shipCoordinates
+    }
+
+    const addShipsVertical = (sizeShip) => {
+        let shipCoordinates = [...boardMachine]
+        let firstDimension = Math.floor(Math.random() * 9)
+        let secondDimension= Math.floor(Math.random() * 9)
+        let ship = firstDimension + sizeShip
+        let boxsInvalids = false
+
+        if (ship > 9) {
+            addShipsVertical(sizeShip)
+            return boardMachine
+        }
+
+        for (let i = firstDimension; i < ship; i++) {
+            if (shipCoordinates[i][secondDimension] == "") {
+                boxsInvalids = true
+            }
+        }
+
+        if (boxsInvalids == false) {
+            for (let i = firstDimension; i < ship; i++) {
+                shipCoordinates[i][secondDimension] = "" /* Posiciona el barco accediendo a la misma posición de la segunda dimensión por cada array de la primera dimensión */
+            }
+        }
+        else {
+            addShipsVertical(sizeShip)
+        }
+        return shipCoordinates
     }
 
     const shipAmount = useRef(0)
@@ -39,16 +68,16 @@ const Machine = ({ boardMachine, setBoardMachine, setTurn, human, winMachine, wi
             addShipsHorizontal(5)
             addShipsHorizontal(4)
             addShipsHorizontal(3)
-            addShipsHorizontal(3)
-            addShipsHorizontal(2)
+            addShipsVertical(3)
+            addShipsVertical(2)
             shipAmount.current = 1
         }
         if (newGameMachine == true) {
             addShipsHorizontal(5)
             addShipsHorizontal(4)
             addShipsHorizontal(3)
-            addShipsHorizontal(3)
-            addShipsHorizontal(2)
+            addShipsVertical(3)
+            addShipsVertical(2)
         }
     }, [boardMachine])
 
@@ -91,6 +120,7 @@ const Machine = ({ boardMachine, setBoardMachine, setTurn, human, winMachine, wi
         <>
             <div id="board">
                 <Messagge>Machine</Messagge>
+
                 <div className="d-flex">
                     {
                         [" ", 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => (
@@ -108,7 +138,7 @@ const Machine = ({ boardMachine, setBoardMachine, setTurn, human, winMachine, wi
                             <div id="box" type="button" className="btn btn-light">
                                 {indexRow + 1}
                             </div>
-                            
+
                             {
                                 row.map((box, indexBox) => (
                                     <Square key={indexBox} onGetShotHuman={() => { if (winMachine != 17 && winHuman != 17) getGunShotHuman(indexRow, indexBox) }} boardMachine={boardMachine} newGameMachine={newGameMachine} setNewGameMachine={setNewGameMachine} shipsMachine={shipsMachine}>{box}</Square>

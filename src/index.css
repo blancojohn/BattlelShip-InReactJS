@@ -1,13 +1,14 @@
-
+/* Disposición y tamaño para los tableros en los componentes <Human /> y <Machine />  */
 #board {
   display: grid;
-  grid-template-columns: repeat(10, 1 fr);
-  color: brown;
+  grid-template-columns: repeat(9, 1 fr);
+  color: black;
   width: 300px;
   height: 300px;
   margin-left: 160px;
 }
 
+/* Define tamaño y apariencia de cada <Square /> */
 #box {
   width: 30px;
   height: 30px;
@@ -15,10 +16,7 @@
   text-align: center;
 }
 
-.childrenBox {
-  visibility: hidden;
-}
-
+/* Disposición y apariencia del <ButtonsPositions /> */
 #buttons-select-directions {
   height: 60px;
   width: 110px;
@@ -28,4 +26,10 @@
   position: absolute; 
   z-index: 1;
 }
+
+/* Oculta los valores en los <Square /> */
+.childrenBox {
+  visibility: hidden;
+}
+
 

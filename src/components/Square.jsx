@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ButtonsPositions from "./ButtonsPositions";
 
-/* <Square /> es hijo de <Human /> y <Machine /> */
 const Square = ({ children, human, boardMachine, onGetShotHuman, onAddShip, invalidButtonsPositions, setInvalidButtonsPositions, newGameHuman, setNewGameHuman, newGameMachine, setNewGameMachine, shipsMachine }) => {
     const [colorAction, setColorAction] = useState("btn btn-light");
     const [shipDirectionsArrows, setShipDirectionsArrows] = useState(false);/* Cada <Square /> tiene un estado independiente para mostrar u ocultar al hijo <ButtonsPositions /> en <Human />. */

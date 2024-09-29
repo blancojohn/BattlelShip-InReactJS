@@ -51,7 +51,7 @@ const Human = ({ turn, human, setHuman, winHuman, setWinMachine, newGameHuman, s
             let boxsInvalids = false /* Según valor en el que se encuentre no permite que se sobrepongan los barcos */
 
             /* Valida la suma de los parámetros en la declaración de la variable ship para que los barcos no pasen el límite vertical del tablero */
-            if (ship > 10) {
+            if (ship > 9) {
                 alert("Posicionamineto inválido. Repetir")
                 return human.board
             }
@@ -161,7 +161,7 @@ const Human = ({ turn, human, setHuman, winHuman, setWinMachine, newGameHuman, s
 
                             {
                                 row.map((box, indexBox) => (
-                                    <Square key={indexBox} human={human} onAddShip={(positions) => {
+                                    <Square key={indexBox}  onAddShip={(positions) => {
                                         if (human.nameShip === "Porta Aviones") {
                                             addShip(indexRow, indexBox, 5, positions)
                                         }
@@ -177,7 +177,7 @@ const Human = ({ turn, human, setHuman, winHuman, setWinMachine, newGameHuman, s
                                         else if (human.nameShip === "Bote Patrulla") {
                                             addShip(indexRow, indexBox, 2, positions)
                                         }
-                                    }} invalidButtonsPositions={invalidButtonsPositions} setInvalidButtonsPositions={setInvalidButtonsPositions} newGameHuman={newGameHuman} setNewGameHuman={setNewGameHuman}>
+                                    }} human={human} invalidButtonsPositions={invalidButtonsPositions} setInvalidButtonsPositions={setInvalidButtonsPositions} newGameHuman={newGameHuman} setNewGameHuman={setNewGameHuman}>
                                         {box}
                                     </Square>
                                 ))
@@ -188,11 +188,11 @@ const Human = ({ turn, human, setHuman, winHuman, setWinMachine, newGameHuman, s
                 <div className="text-center">
                     {
                         (human.nameShip == "Porta Aviones" || human.nameShip == "Acorazado" || human.nameShip == "Destructor" || human.nameShip == "Submarino" || human.nameShip == "Bote Patrulla") &&
-                        <Messagge>Haz clikc en una coordenada para inciar posicionamiento del {human.nameShip}</Messagge>
+                        <Messagge><span className="text-primary">Haz clikc en una coordenada para inciar posicionamiento del {human.nameShip}</span></Messagge>
                     }
                     {
                         (human.nameShip == "Haz click en una coordenada del tablero de la máquina para disparar") &&
-                        <Messagge>Dispara haciendo click en una casilla del enemigo</Messagge>
+                        <Messagge><span className="text-danger">Dispara haciendo click en una casilla del enemigo</span></Messagge>
                     }
                 </div>
             </div>
