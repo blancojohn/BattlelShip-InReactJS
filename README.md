@@ -14,6 +14,10 @@ Bote-Patrulla= 2 casillas.
 
 El tablero del lado derecho pertenece a la máquina. En el se posicionan los mismo tipos de barcos que en el tablero del humano pero, automaticamente y de manera aleatoria por cada partida.
 
+Cuando la persona o la máquina ejecutan un disparo certero, la casilla se pintará de color roja. Cuando fallen, la casilla se pintará azul. 
+
+Para los posicionaminetos de los barcos las casillas se pintarpan negras. 
+
 ## Setup
 
 Start the server
