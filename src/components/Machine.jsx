@@ -35,7 +35,7 @@ const Machine = ({ boardMachine, setBoardMachine, setTurn, human, winMachine, wi
     const addShipsVertical = (sizeShip) => {
         let shipCoordinates = [...boardMachine]
         let firstDimension = Math.floor(Math.random() * 9)
-        let secondDimension= Math.floor(Math.random() * 9)
+        let secondDimension = Math.floor(Math.random() * 9)
         let ship = firstDimension + sizeShip
         let boxsInvalids = false
 
@@ -118,24 +118,23 @@ const Machine = ({ boardMachine, setBoardMachine, setTurn, human, winMachine, wi
 
     return (
         <>
-            <div id="board">
+            <div className="board-machine">
                 <Messagge>Machine</Messagge>
 
-                <div className="d-flex">
-                    {
-                        [" ", 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => (
-                            <div key={index} id="box" type="button" className="btn btn-light">
-                                {item}
-                            </div>
-                        ))
-                    }
-                </div>
+                {
+                    [" ", 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => (
+                        <div key={index} id="box-boards" type="button" className="btn btn-light">
+                            {item}
+                        </div>
+                    ))
+                }
+
 
                 {
                     (boardMachine != null) &&
                     boardMachine.map((row, indexRow) => (
                         <span key={indexRow}>
-                            <div id="box" type="button" className="btn btn-light">
+                            <div id="box-boards" type="button" className="btn btn-light">
                                 {indexRow + 1}
                             </div>
 

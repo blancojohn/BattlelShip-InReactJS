@@ -70,7 +70,7 @@ const Square = ({ children, human, boardMachine, onGetShotHuman, onAddShip, inva
 
     return (
         <>
-            <div id="box" type="button" className={colorAction} onClick={validStatesandActions}>
+            <div id="box-boards" type="button" className={colorAction} onClick={validStatesandActions}>
                 <span className={`${(children == "Y" || children == "N") && "childrenBox" } d-flex justify-content-center`}>
                     {children}
                 </span>

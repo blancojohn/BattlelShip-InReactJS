@@ -49,11 +49,27 @@ const App = () => {
                         ¡Ha ganado la máquina!. Jugar de nuevo <button onClick={playAgain} className="btn btn-dark"><GrUpdate /></button>
                     </Messagge>
             }
-            <div className="d-flex">
-                <Human turn={turn} human={human} setHuman={setHuman} winHuman={winHuman} setWinMachine={setWinMachine} newGameHuman={newGameHuman} setNewGameHuman={setNewGameHuman}/>
+            <div className="container-boards">
+                <Human turn={turn} 
+                    human={human} 
+                    setHuman={setHuman} 
+                    winHuman={winHuman} 
+                    setWinMachine={setWinMachine} 
+                    newGameHuman={newGameHuman} 
+                    setNewGameHuman={setNewGameHuman}
+                />
 
                 {/* Recibe los estados winMachine y WinHuman para validar que la persona no siga disparando cuando gana o pierde y Recibe el estado de human para validar disparo después de que la persona posicione todos sus barcos */}
-                <Machine setTurn={setTurn} boardMachine={boardMachine} setBoardMachine={setBoardMachine} human={human} winMachine={winMachine} winHuman={winHuman} setWinHuman={setWinHuman} newGameMachine={newGameMachine} setNewGameMachine={setNewGameMachine} shipsMachine={shipsMachine} setShipsMachine={setShipsMachine}/>
+                <Machine 
+                    setTurn={setTurn} 
+                    boardMachine={boardMachine} 
+                    setBoardMachine={setBoardMachine} 
+                    human={human} winMachine={winMachine} 
+                    winHuman={winHuman} setWinHuman={setWinHuman} 
+                    newGameMachine={newGameMachine} 
+                    setNewGameMachine={setNewGameMachine} 
+                    shipsMachine={shipsMachine} 
+                    setShipsMachine={setShipsMachine}/>
             </div>
         </>
     )

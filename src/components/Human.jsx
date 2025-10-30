@@ -139,29 +139,29 @@ const Human = ({ turn, human, setHuman, winHuman, setWinMachine, newGameHuman, s
 
     return (
         <>
-            <div id="board">
-            <Messagge>Human</Messagge> 
-                <div className="d-flex">
-                    {
-                        [" ", 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => (
-                            <div key={index} id="box" type="button" className="btn btn-light">
-                                {item}
-                            </div>
-                        ))
-                    }
-                </div>
-                
+            <div className="board-human">
+                <Messagge>Human</Messagge>
+
+                {
+                    [" ", 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => (
+                        <div key={index} id="box-boards" type="button" className="btn btn-light">
+                            {item}
+                        </div>
+                    ))
+                }
+
+
                 {
                     (human.board != null) &&
                     human.board.map((row, indexRow) => (
                         <span key={indexRow}>
-                            <div id="box" type="button" className="btn btn-light">
+                            <div id="box-boards" type="button" className="btn btn-light">
                                 {indexRow + 1}
                             </div>
 
                             {
                                 row.map((box, indexBox) => (
-                                    <Square key={indexBox}  onAddShip={(positions) => {
+                                    <Square key={indexBox} onAddShip={(positions) => {
                                         if (human.nameShip === "Porta Aviones") {
                                             addShip(indexRow, indexBox, 5, positions)
                                         }
