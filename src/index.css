@@ -1,4 +1,8 @@
 
+body {
+   background: radial-gradient(white, blue);
+}
+
 .container-boards {
   display: grid;
   grid-template-columns: repeat(2, 500px);

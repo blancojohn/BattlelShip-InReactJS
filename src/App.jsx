@@ -36,7 +36,9 @@ const App = () => {
 
     return (
         <>
-            <Messagge>BATTLESHIP IN REACT</Messagge>
+            <div className="d-flex justify-content-center mt-5">
+                <Messagge>BATTLESHIP IN REACT</Messagge>
+            </div>
             {
                 (winHuman == 17) &&
                     <Messagge>
